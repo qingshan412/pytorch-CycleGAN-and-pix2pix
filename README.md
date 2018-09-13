@@ -94,7 +94,7 @@ bash ./datasets/download_cyclegan_dataset.sh maps
 ```
 python -m visdom.server
 ```
-Or use ```--displayid 0``` to void visdom. 
+Or use ```--display_id -1``` to void visdom. 
 - Train a model:
 ```bash
 #!./scripts/train_cyclegan.sh
