@@ -90,6 +90,11 @@ cd pytorch-CycleGAN-and-pix2pix
 ```bash
 bash ./datasets/download_cyclegan_dataset.sh maps
 ```
+- To start the service for localhost disply by 
+```
+python -m visdom.server
+```
+Or use ```--displayid 0``` to void visdom. 
 - Train a model:
 ```bash
 #!./scripts/train_cyclegan.sh
