@@ -16,8 +16,8 @@ class UnalignedDataset(BaseDataset):
         self.dir_A = os.path.join(opt.dataroot, opt.phase + 'A')
         self.dir_B = os.path.join(opt.dataroot, opt.phase + 'B')
 
-        self.A_paths = make_dataset(self.dir_A)
-        self.B_paths = make_dataset(self.dir_B)
+        self.A_paths = make_dataset(self.dir_A) ### [image_dir_0, image_dir_1, image_dir_2,...]
+        self.B_paths = make_dataset(self.dir_B) ### [image_dir_0, image_dir_1, image_dir_2,...]
 
         self.A_paths = sorted(self.A_paths)
         self.B_paths = sorted(self.B_paths)
@@ -38,7 +38,7 @@ class UnalignedDataset(BaseDataset):
 
         A = self.transform(A_img)
         B = self.transform(B_img)
-        if self.opt.direction == 'BtoA':
+        if self.opt.direction == 'BtoA': ### one direction???
             input_nc = self.opt.output_nc
             output_nc = self.opt.input_nc
         else:

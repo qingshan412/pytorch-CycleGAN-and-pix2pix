@@ -153,7 +153,8 @@ class Visualizer():
                     'title': self.name + ' loss over time',
                     'legend': self.plot_data['legend'],
                     'xlabel': 'epoch',
-                    'ylabel': 'loss'},
+                    'ylabel': 'loss',
+                    'width': 800},
                 win=self.display_id)
         except VisdomExceptionBase:
             self.throw_visdom_connection_error()

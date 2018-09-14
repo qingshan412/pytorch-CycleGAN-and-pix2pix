@@ -4,18 +4,18 @@ from data.base_data_loader import BaseDataLoader
 from data.base_dataset import BaseDataset
 
 
-def find_dataset_using_name(dataset_name):
+def find_dataset_using_name(dataset_mode): ### dataset_name
     # Given the option --dataset_mode [datasetname],
     # the file "data/datasetname_dataset.py"
     # will be imported.
-    dataset_filename = "data." + dataset_name + "_dataset"
+    dataset_filename = "data." + dataset_mode + "_dataset" ### dataset_name
     datasetlib = importlib.import_module(dataset_filename)
 
     # In the file, the class called DatasetNameDataset() will
     # be instantiated. It has to be a subclass of BaseDataset,
     # and it is case-insensitive.
     dataset = None
-    target_dataset_name = dataset_name.replace('_', '') + 'dataset'
+    target_dataset_name = dataset_mode.replace('_', '') + 'dataset' ### dataset_name
     for name, cls in datasetlib.__dict__.items():
         if name.lower() == target_dataset_name.lower() \
            and issubclass(cls, BaseDataset):
@@ -34,15 +34,15 @@ def get_option_setter(dataset_name):
 
 
 def create_dataset(opt):
-    dataset = find_dataset_using_name(opt.dataset_mode)
-    instance = dataset()
-    instance.initialize(opt)
+    dataset = find_dataset_using_name(opt.dataset_mode) ### class UnalignedDataset
+    instance = dataset() ### instance = UnalignedDataset() # empty instance
+    instance.initialize(opt) ### initialize basic vars
     print("dataset [%s] was created" % (instance.name()))
     return instance
 
 
 def CreateDataLoader(opt):
-    data_loader = CustomDatasetDataLoader()
+    data_loader = CustomDatasetDataLoader() ### -> CustomDatasetDataLoader -> BaseDataLoader (pass)
     data_loader.initialize(opt)
     return data_loader
 
@@ -54,8 +54,8 @@ class CustomDatasetDataLoader(BaseDataLoader):
         return 'CustomDatasetDataLoader'
 
     def initialize(self, opt):
-        BaseDataLoader.initialize(self, opt)
-        self.dataset = create_dataset(opt)
+        BaseDataLoader.initialize(self, opt) ### self.opt=opt
+        self.dataset = create_dataset(opt) ### unaligned dataset with A,B,trans info
         self.dataloader = torch.utils.data.DataLoader(
             self.dataset,
             batch_size=opt.batch_size,
