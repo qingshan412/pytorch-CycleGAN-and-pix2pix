@@ -24,6 +24,7 @@ losses = {}
 for i in range(len(idx_name)):
     losses[idx_name[i]] = []
 
+print('Reading from ' + LogPath + '...')
 fo = open(LogPath)
 while 1:
     lines = fo.readlines(10000)
