@@ -7,6 +7,8 @@ from util.visualizer import Visualizer
 if __name__ == '__main__':
     ### data
     opt = TrainOptions().parse()
+    print(opt.dataroot)
+    print(opt.dataset_mode)
     data_loader = CreateDataLoader(opt)
     dataset = data_loader.load_data() ### return self 233
     dataset_size = len(data_loader)
