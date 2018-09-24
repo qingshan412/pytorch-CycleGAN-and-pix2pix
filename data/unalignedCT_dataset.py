@@ -18,8 +18,8 @@ class UnalignedCTDataset(BaseDataset):
         self.dir_A = os.path.join(opt.dataroot, opt.phase + 'A')
         self.dir_B = os.path.join(opt.dataroot, opt.phase + 'B')
 
-        self.A_paths = make_dataset(self.dir_A) ### [image_dir_0, image_dir_1, image_dir_2,...]
-        self.B_paths = make_dataset(self.dir_B) ### [image_dir_0, image_dir_1, image_dir_2,...]
+        self.A_paths = make_ct_dataset(self.dir_A) ### [image_dir_0, image_dir_1, image_dir_2,...]
+        self.B_paths = make_ct_dataset(self.dir_B) ### [image_dir_0, image_dir_1, image_dir_2,...]
 
         self.A_paths = sorted(self.A_paths)
         self.B_paths = sorted(self.B_paths)

@@ -13,12 +13,19 @@ import os.path
 
 IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',
-    '.png', '.PNG', '.ppm', '.PPM', '.bmp', '.BMP',
+    '.png', '.PNG', '.ppm', '.PPM', '.bmp', '.BMP'
+]
+
+CT_EXTENSIONS = [
+    '.dcm',
 ]
 
 
 def is_image_file(filename):
     return any(filename.endswith(extension) for extension in IMG_EXTENSIONS)
+
+def is_ct_file(filename):
+    return any(filename.endswith(extension) for extension in CT_EXTENSIONS)
 
 
 def make_dataset(dir):
@@ -28,6 +35,19 @@ def make_dataset(dir):
     for root, _, fnames in sorted(os.walk(dir)): ### dataroot/trainA
         for fname in fnames:
             if is_image_file(fname):
+                path = os.path.join(root, fname)
+                images.append(path)
+
+    return images
+
+
+def make_ct_dataset(dir):
+    images = []
+    assert os.path.isdir(dir), '%s is not a valid directory' % dir
+
+    for root, _, fnames in sorted(os.walk(dir)): ### dataroot/trainA
+        for fname in fnames:
+            if is_ct_file(fname):
                 path = os.path.join(root, fname)
                 images.append(path)
 
