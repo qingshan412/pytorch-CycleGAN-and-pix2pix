@@ -52,11 +52,11 @@ class UnalignedCTDataset(BaseDataset):
 
         if input_nc == 1:  # RGB to gray
         #     tmp = A[0, ...] * 0.299 + A[1, ...] * 0.587 + A[2, ...] * 0.114
-            A = tmp.unsqueeze(0)
+            A = A.unsqueeze(0)
 
         if output_nc == 1:  # RGB to gray
         #     tmp = B[0, ...] * 0.299 + B[1, ...] * 0.587 + B[2, ...] * 0.114
-            B = tmp.unsqueeze(0)
+            B = B.unsqueeze(0)
         return {'A': A, 'B': B,
                 'A_paths': A_path, 'B_paths': B_path}
 
