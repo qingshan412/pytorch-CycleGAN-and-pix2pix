@@ -110,7 +110,7 @@ def __print_size_warning(ow, oh, w, h):
 
 def __ct_random_crop(img, target_size):
     print(type(img))
-    ow, oh = img.size
+    ow, oh = img.shape
     
     ### input is supposed to be a 2D numpy array here
     ### output should be a tensor in pytorch
