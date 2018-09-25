@@ -56,10 +56,10 @@ def get_transform(opt):
         transform_list += [transforms.ToTensor(),
                         transforms.Normalize((0.5, 0.5, 0.5),
                                                 (0.5, 0.5, 0.5))]
-    else:
-        transform_list += [transforms.ToTensor(),
-                        transforms.Normalize((0.5,),
-                                                (0.5,))]
+    # else:
+    #     transform_list += [transforms.ToTensor(),
+    #                     transforms.Normalize((0.5,),
+    #                                             (0.5,))]
     return transforms.Compose(transform_list)
 
 
@@ -139,6 +139,9 @@ def __ct_random_crop(img, target_size):
         res = np.flip(res, 1) ## horizontal
     
     ### to tensor
-    # res = torch.from_numpy(res)
+    res = torch.from_numpy(res)
+
+    ### normalize
+    res = (res - 0.5)/0.5
 
     return res
