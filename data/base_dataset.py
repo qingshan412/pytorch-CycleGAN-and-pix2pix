@@ -49,12 +49,17 @@ def get_transform(opt):
     else:
         raise ValueError('--resize_or_crop %s is not a valid option.' % opt.resize_or_crop)
 
-    if opt.isTrain and not opt.no_flip:
-        transform_list.append(transforms.RandomHorizontalFlip())
+    if opt.resize_or_crop != 'ct_crop':
+        if opt.isTrain and (not opt.no_flip) and :
+            transform_list.append(transforms.RandomHorizontalFlip())
 
-    transform_list += [transforms.ToTensor(),
-                       transforms.Normalize((0.5, 0.5, 0.5),
-                                            (0.5, 0.5, 0.5))]
+        transform_list += [transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5),
+                                                (0.5, 0.5, 0.5))]
+    else:
+        transform_list += [transforms.ToTensor(),
+                        transforms.Normalize((0.5,),
+                                                (0.5,))]
     return transforms.Compose(transform_list)
 
 
@@ -109,11 +114,13 @@ def __print_size_warning(ow, oh, w, h):
         __print_size_warning.has_printed = True
 
 def __ct_random_crop(img, target_size):
-    print(type(img))
+    # print(type(img))
     ow, oh = img.shape
     
-    ### input is supposed to be a 2D numpy array here
+    ### input is supposed to be a uint16 (0~65535) 2D numpy array here
     ### output should be a tensor in pytorch
+
+    ### crop
     if isinstance(target_size, numbers.Number):
         tw, th = int(target_size), int(target_size)
     else:
@@ -122,4 +129,15 @@ def __ct_random_crop(img, target_size):
     i = random.randint(0, ow - tw)
     j = random.randint(0, oh - th)
 
-    return torch.from_numpy(img[i:i+tw, j:j+th].astype(np.int32))
+    res = img[i:i+tw, j:j+th].astype(np.float32)/65535. ### no int16 in torch
+
+    ### flip
+    if random.randint(0, 1) < 1:
+        res = np.flip(res, 0) ### vertical
+    if random.randint(0, 1) > 0:
+        res = np.flip(res, 1) ## horizontal
+    
+    ### to tensor
+    # res = torch.from_numpy(res)
+
+    return res
