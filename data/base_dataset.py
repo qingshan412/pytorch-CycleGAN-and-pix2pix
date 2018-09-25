@@ -56,10 +56,16 @@ def get_transform(opt):
         transform_list += [transforms.ToTensor(),
                         transforms.Normalize((0.5, 0.5, 0.5),
                                                 (0.5, 0.5, 0.5))]
-    # else:
-    #     transform_list += [transforms.ToTensor(),
-    #                     transforms.Normalize((0.5,),
-    #                                             (0.5,))]
+    else:
+        if opt.isTrain and not opt.no_flip:
+            transform_list.append(transforms.Lambda(
+                lambda img: __ct_random_flip(img)))
+
+        transform_list += [transforms.Lambda(
+                lambda img: __ct_to_tensor(img)),
+                        transforms.Lambda(
+                lambda img: __ct_normalize(img))]
+
     return transforms.Compose(transform_list)
 
 
@@ -117,7 +123,7 @@ def __ct_random_crop(img, target_size):
     # print(type(img))
     ow, oh = img.shape
     
-    ### input is supposed to be a uint16 (0~65535) 2D numpy array here
+    ### input is supposed to be a float32 [0,1] numpy array here
     ### output should be a tensor in pytorch
 
     ### crop
@@ -129,19 +135,24 @@ def __ct_random_crop(img, target_size):
     i = random.randint(0, ow - tw)
     j = random.randint(0, oh - th)
 
-    res = img[i:i+tw, j:j+th].astype(np.float32)/65535. 
-    ### no int16 in torch
+    res = img[i:i+tw, j:j+th] 
+    
+    return res
 
+def __ct_random_flip(img):
+    res = img.copy()
     ### flip
     if random.randint(0, 1) < 1:
         res = np.flip(res, 0).copy() ### vertical
     if random.randint(0, 1) > 0:
         res = np.flip(res, 1).copy() ## horizontal
     
-    ### to tensor
-    res = torch.from_numpy(res)
-
-    ### normalize
-    res = (res - 0.5)/0.5
-
     return res
+
+def __ct_to_tensor(res):
+    ### to tensor
+    return torch.from_numpy(res)
+
+def __ct_normalize(res):
+    ### normalize
+    return (res - 0.5)/0.5
