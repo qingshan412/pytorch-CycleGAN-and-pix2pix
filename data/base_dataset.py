@@ -109,6 +109,7 @@ def __print_size_warning(ow, oh, w, h):
         __print_size_warning.has_printed = True
 
 def __ct_random_crop(img, target_size):
+    print(type(img))
     ow, oh = img.size
     
     ### input is supposed to be a 2D numpy array here
