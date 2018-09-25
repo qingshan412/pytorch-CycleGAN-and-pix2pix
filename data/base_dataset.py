@@ -134,9 +134,9 @@ def __ct_random_crop(img, target_size):
 
     ### flip
     if random.randint(0, 1) < 1:
-        res = np.flip(res, 0) ### vertical
+        res = np.flip(res, 0).copy() ### vertical
     if random.randint(0, 1) > 0:
-        res = np.flip(res, 1) ## horizontal
+        res = np.flip(res, 1).copy() ## horizontal
     
     ### to tensor
     res = torch.from_numpy(res)
