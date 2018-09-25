@@ -18,6 +18,17 @@ def tensor2im(input_image, imtype=np.uint8):
     image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0
     return image_numpy.astype(imtype)
 
+def tensor2ctim(input_image, imtype=np.uint16):
+    if isinstance(input_image, torch.Tensor):
+        image_tensor = input_image.data
+    else:
+        return input_image
+    image_numpy = image_tensor[0].cpu().float().numpy()
+    # if image_numpy.shape[0] == 1:
+    #     image_numpy = np.tile(image_numpy, (3, 1, 1))
+    # image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0
+    image_numpy = (image_numpy + 1) / 2.0 * 65535.0
+    return image_numpy.astype(imtype)
 
 def diagnose_network(net, name='network'):
     mean = 0.0
@@ -35,6 +46,9 @@ def diagnose_network(net, name='network'):
 def save_image(image_numpy, image_path):
     image_pil = Image.fromarray(image_numpy)
     image_pil.save(image_path)
+
+def save_ct_image(image_numpy, image_path):
+    np.save(image_path, image_numpy)
 
 
 def print_numpy(x, val=True, shp=False):
