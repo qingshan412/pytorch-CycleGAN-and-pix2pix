@@ -2,6 +2,10 @@ import torch.utils.data as data
 from PIL import Image
 import torchvision.transforms as transforms
 
+import random, numbers
+import torch
+import numpy as np
+
 
 class BaseDataset(data.Dataset):
     def __init__(self):
@@ -39,6 +43,9 @@ def get_transform(opt):
     elif opt.resize_or_crop == 'none':
         transform_list.append(transforms.Lambda(
             lambda img: __adjust(img)))
+    elif opt.resize_or_crop == 'ct_crop':
+        transform_list.append(transforms.Lambda(
+            lambda img: __ct_random_crop(img, opt.fineSize)))
     else:
         raise ValueError('--resize_or_crop %s is not a valid option.' % opt.resize_or_crop)
 
@@ -100,3 +107,18 @@ def __print_size_warning(ow, oh, w, h):
               "(%d, %d). This adjustment will be done to all images "
               "whose sizes are not multiples of 4" % (ow, oh, w, h))
         __print_size_warning.has_printed = True
+
+def __ct_random_crop(img, target_size):
+    ow, oh = img.size
+    
+    ### input is supposed to be a 2D numpy array here
+    ### output should be a tensor in pytorch
+    if isinstance(target_size, numbers.Number):
+        tw, th = int(target_size), int(target_size)
+    else:
+        tw, th = target_size
+
+    i = random.randint(0, ow - tw)
+    j = random.randint(0, oh - th)
+
+    return torch.from_numpy(img[i:i+tw, j:j+th].astype(np.int32))
