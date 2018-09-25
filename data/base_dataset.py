@@ -129,7 +129,7 @@ def __ct_random_crop(img, target_size):
     i = random.randint(0, ow - tw)
     j = random.randint(0, oh - th)
 
-    res = img[i:i+tw, j:j+th].reshape((1, tw, th))astype(np.float32)/65535. 
+    res = img[i:i+tw, j:j+th].reshape((1, tw, th)).astype(np.float32)/65535. 
     ### no int16 in torch
 
     ### flip
