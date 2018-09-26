@@ -3,6 +3,8 @@ For the dataset from hospital, they are stored in the format of DICOMDIR, which 
 
 ```run.sh``` is the script used to run the experiments. 
 
+More details can be found in the original instructions as below. 
+
 <img src='imgs/horse2zebra.gif' align="right" width=384>
 
 <br><br><br>

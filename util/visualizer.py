@@ -49,10 +49,10 @@ def save_ct_npy(web_dir, visuals, image_path):
     ims, txts, links = [], [], []
 
     for label, im_data in visuals.items():
-        im = util.tensor2ctim(im_data)
+        im = np.squeeze(util.tensor2ctim(im_data))
         image_name = '%s_%s.npy' % (name, label)
         save_path = os.path.join(image_dir, image_name)
-        _, h, w = im.shape
+        # _, h, w = im.shape
         # if aspect_ratio > 1.0:
         #     im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
         # if aspect_ratio < 1.0:
