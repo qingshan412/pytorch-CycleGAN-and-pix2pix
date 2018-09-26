@@ -4,6 +4,8 @@ import numpy as np
 from PIL import Image
 import os
 
+import matplotlib.pyplot as plt
+
 
 # Converts a Tensor into an image array (numpy)
 # |imtype|: the desired type of the converted numpy array
@@ -48,8 +50,8 @@ def save_image(image_numpy, image_path):
     image_pil.save(image_path)
 
 def save_ct_image(image_numpy, image_path):
-    np.save(image_path, image_numpy)
-
+    plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    plt.savefig(image_path)
 
 def print_numpy(x, val=True, shp=False):
     x = x.astype(np.float64)

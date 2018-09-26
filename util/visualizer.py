@@ -40,7 +40,7 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
 
 
 # save ct numpy arrays to npz
-def save_ct_npz(web_dir, visuals, image_path):
+def save_ct_npy(web_dir, visuals, image_path):
     image_dir = web_dir # page.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
     short_path = ntpath.basename(image_path[0]) ### testA1.dcm
     name = os.path.splitext(short_path)[0] ### testA1
@@ -57,7 +57,7 @@ def save_ct_npz(web_dir, visuals, image_path):
         #     im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
         # if aspect_ratio < 1.0:
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
-        util.save_ct_image(im, save_path)
+        np.save(save_path, im)
 
         # ims.append(image_name)
         # txts.append(label)
@@ -157,6 +157,75 @@ class Visualizer():
 
                 for label, image_numpy in visuals.items():
                     image_numpy = util.tensor2im(image)
+                    img_path = 'epoch%.3d_%s.png' % (n, label)
+                    ims.append(img_path)
+                    txts.append(label)
+                    links.append(img_path)
+                webpage.add_images(ims, txts, links, width=self.win_size)
+            webpage.save()
+
+    def display_current_ct_results(self, visuals, epoch, save_result):
+        if self.display_id > 0:  # show images in the browser
+            ncols = self.ncols
+            if ncols > 0:
+                ncols = min(ncols, len(visuals))
+                h, w = next(iter(visuals.values())).shape[:2]
+                table_css = """<style>
+                        table {border-collapse: separate; border-spacing:4px; white-space:nowrap; text-align:center}
+                        table td {width: %dpx; height: %dpx; padding: 4px; outline: 4px solid black}
+                        </style>""" % (w, h)
+                title = self.name
+                label_html = ''
+                label_html_row = ''
+                images = []
+                idx = 0
+                for label, image in visuals.items():
+                    image_numpy = util.tensor2im(image)
+                    label_html_row += '<td>%s</td>' % label
+                    images.append(image_numpy.transpose([2, 0, 1]))
+                    idx += 1
+                    if idx % ncols == 0:
+                        label_html += '<tr>%s</tr>' % label_html_row
+                        label_html_row = ''
+                white_image = np.ones_like(image_numpy.transpose([2, 0, 1])) * 255
+                while idx % ncols != 0:
+                    images.append(white_image)
+                    label_html_row += '<td></td>'
+                    idx += 1
+                if label_html_row != '':
+                    label_html += '<tr>%s</tr>' % label_html_row
+                # pane col = image row
+                try:
+                    self.vis.images(images, nrow=ncols, win=self.display_id + 1,
+                                    padding=2, opts=dict(title=title + ' images'))
+                    label_html = '<table>%s</table>' % label_html
+                    self.vis.text(table_css + label_html, win=self.display_id + 2,
+                                  opts=dict(title=title + ' labels'))
+                except VisdomExceptionBase:
+                    self.throw_visdom_connection_error()
+
+            else:
+                idx = 1
+                for label, image in visuals.items():
+                    image_numpy = util.tensor2im(image)
+                    self.vis.image(image_numpy.transpose([2, 0, 1]), opts=dict(title=label),
+                                   win=self.display_id + idx)
+                    idx += 1
+
+        if self.use_html and (save_result or not self.saved):  # save images to a html file
+            self.saved = True
+            for label, image in visuals.items():
+                image_numpy = util.tensor2ctim(image)
+                img_path = os.path.join(self.img_dir, 'epoch%.3d_%s.png' % (epoch, label))
+                util.save_ct_image(image_numpy, img_path)
+            # update website
+            webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
+            for n in range(epoch, 0, -1):
+                webpage.add_header('epoch [%d]' % n)
+                ims, txts, links = [], [], []
+
+                for label, image_numpy in visuals.items():
+                    # image_numpy = util.tensor2ctim(image)
                     img_path = 'epoch%.3d_%s.png' % (n, label)
                     ims.append(img_path)
                     txts.append(label)

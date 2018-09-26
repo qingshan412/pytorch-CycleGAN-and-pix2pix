@@ -2,7 +2,7 @@ import os
 from options.test_options import TestOptions
 from data import CreateDataLoader
 from models import create_model
-from util.visualizer import save_images
+from util.visualizer import save_ct_npy
 from util import html
 
 
