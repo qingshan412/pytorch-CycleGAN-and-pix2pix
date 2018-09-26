@@ -1,10 +1,11 @@
-<img src='imgs/horse2zebra.gif' align="right" width=384>
-
-<br><br><br>
 # CycleGAN for CT images
 For the dataset from hospital, they are stored in the format of DICOMDIR, which can be extracted and read by [pydicom](https://pydicom.github.io/pydicom/stable/index.html). 
 
 ```run.sh``` is the script used to run the experiments. 
+
+<img src='imgs/horse2zebra.gif' align="right" width=384>
+
+<br><br><br>
 
 # CycleGAN and pix2pix in PyTorch
 
