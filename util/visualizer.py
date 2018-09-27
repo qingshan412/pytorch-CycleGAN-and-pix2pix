@@ -59,6 +59,7 @@ def save_ct_npy(web_dir, visuals, image_path):
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         np.save(save_path, im)
 
+        # util.save_ct_image(im, save_path)
         # ims.append(image_name)
         # txts.append(label)
         # links.append(image_name)
