@@ -61,16 +61,16 @@ def save_ct_npy(web_dir, visuals, image_path, width=256):
         # np.save(save_path, im_numpy)
         if 'idt' in label:
             if 'A' in label:
-                mean_str, std_str = util.save_ctB_images(im_numpy, save_path)
+                mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
             else:
-                mean_str, std_str = util.save_ctA_images(im_numpy, save_path)
+                mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
         else:
             if 'A' in label:
-                mean_str, std_str = util.save_ctA_images(im_numpy, save_path)
+                mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
             else:
-                mean_str, std_str = util.save_ctB_images(im_numpy, save_path)
+                mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
 
-        util.save_cti_image(im_numpy, save_path, label)
+        # util.save_cti_image(im_numpy, save_path, label)
         ims.append(image_name)
         txts.append(label + ', mean:' + ','.join(mean_i) + ', std:' + ','.join(std))
         links.append(image_name)
