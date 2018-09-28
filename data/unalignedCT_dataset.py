@@ -4,7 +4,7 @@ from data.image_folder import make_ct_dataset
 from PIL import Image
 import random
 
-import pydicom
+# import pydicom
 import numpy as np
 
 
@@ -37,8 +37,10 @@ class UnalignedCTDataset(BaseDataset):
         B_path = self.B_paths[index_B]
         # print('(A, B) = (%d, %d)' % (index_A, index_B))
         ### uint16 to float32 to [0, 1]
-        A_img = pydicom.dcmread(A_path).pixel_array.astype(np.float32)/65535.
-        B_img = pydicom.dcmread(B_path).pixel_array.astype(np.float32)/65535.
+        # A_img = pydicom.dcmread(A_path).pixel_array.astype(np.float32)/65535.
+        # B_img = pydicom.dcmread(B_path).pixel_array.astype(np.float32)/65535.
+        A_img = np.load(A_path).astype(np.float32)/65535.
+        B_img = np.load(B_path).astype(np.float32)/65535.
 
         # A_img = Image.open(A_path).convert('RGB')
         # B_img = Image.open(B_path).convert('RGB')

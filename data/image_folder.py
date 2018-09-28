@@ -17,7 +17,7 @@ IMG_EXTENSIONS = [
 ]
 
 CT_EXTENSIONS = [
-    '.dcm',
+    '.npy',
 ]
 
 

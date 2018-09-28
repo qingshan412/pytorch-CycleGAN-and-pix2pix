@@ -53,6 +53,10 @@ def save_ct_image(image_numpy, image_path):
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     plt.savefig(image_path)
 
+def save_cti_image(image_numpy, image_path):
+    plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    plt.savefig(image_path)
+
 def print_numpy(x, val=True, shp=False):
     x = x.astype(np.float64)
     if shp:
