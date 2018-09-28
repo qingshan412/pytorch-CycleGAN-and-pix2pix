@@ -20,7 +20,7 @@ if __name__ == '__main__':
     model.setup(opt)
     # create website
     web_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.epoch)) ### ./results/ctest_cyclegan/test_[epoch]
-    # webpage = html.HTML(web_dir, 'Experiment = %s, Phase = %s, Epoch = %s' % (opt.name, opt.phase, opt.epoch))
+    webpage = html.HTML(web_dir, 'Experiment = %s, Phase = %s, Epoch = %s' % (opt.name, opt.phase, opt.epoch))
     # test
     for i, data in enumerate(dataset):
         if i >= opt.num_test:
@@ -32,6 +32,6 @@ if __name__ == '__main__':
         if i % 5 == 0:
             print('processing (%04d)-th image... %s' % (i, img_path))
         # save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
-        save_ct_npy(web_dir, visuals, img_path)
+        save_ct_npy(web_dir, visuals, img_path, width=opt.display_winsize)
 
     # webpage.save()

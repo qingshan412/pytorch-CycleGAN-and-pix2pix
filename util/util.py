@@ -5,6 +5,7 @@ from PIL import Image
 import os
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 
 # Converts a Tensor into an image array (numpy)
@@ -53,9 +54,37 @@ def save_ct_image(image_numpy, image_path):
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     plt.savefig(image_path)
 
-def save_cti_image(image_numpy, image_path):
+def save_ctA_image(image_numpy, image_path):
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    currentAxis = plt.gca()
+    rect0 = patches.Rectangle((15, 50), 25, 40, linewidth=1, edgecolor='r', facecolor='none')
+    rect1 = patches.Rectangle((18, 112), 18, 20, linewidth=1, edgecolor='r', facecolor='none')
+    rect2 = patches.Rectangle((50, 230), 30, 20, linewidth=1, edgecolor='r', facecolor='none')
+    currentAxis.add_patch(rect0)
+    currentAxis.add_patch(rect1)
+    currentAxis.add_patch(rect2)
     plt.savefig(image_path)
+
+    mean_str = [str(np.mean(image_numpy[50:50+40, 15:15+25])), str(np.mean(image_numpy[112:112+20, 18:18+18])), str(np.mean(image_numpy[230:230+20, 50:50+30]))]
+    std_str = [str(np.std(image_numpy[50:50+40, 15:15+25])), str(np.std(image_numpy[112:112+20, 18:18+18])), str(np.std(image_numpy[230:230+20, 50:50+30]))]
+
+    return mean_str, std_str
+
+def save_ctB_image(image_numpy, image_path):
+    plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    currentAxis = plt.gca()
+    rect0 = patches.Rectangle((60, 20), 40, 20, linewidth=1, edgecolor='r', facecolor='none')
+    rect1 = patches.Rectangle((65, 70), 30, 15, linewidth=1, edgecolor='r', facecolor='none')
+    rect2 = patches.Rectangle((225, 160), 25, 10, linewidth=1, edgecolor='r', facecolor='none')
+    currentAxis.add_patch(rect0)
+    currentAxis.add_patch(rect1)
+    currentAxis.add_patch(rect2)
+    plt.savefig(image_path)
+
+    mean_str = [str(np.mean(image_numpy[20:20+20, 60:60+40])), str(np.mean(image_numpy[70:70+15, 65:65+30])), str(np.mean(image_numpy[160:160+10, 225:225+25]))]
+    std_str = [str(np.std(image_numpy[20:20+20, 60:60+40])), str(np.std(image_numpy[70:70+15, 65:65+30])), str(np.std(image_numpy[160:160+10, 225:225+25]))]
+
+    return mean_str, std_str
 
 def print_numpy(x, val=True, shp=False):
     x = x.astype(np.float64)

@@ -39,8 +39,8 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
     webpage.add_images(ims, txts, links, width=width)
 
 
-# save ct numpy arrays to npz
-def save_ct_npy(web_dir, visuals, image_path):
+# save ct numpy arrays to npy, add to a webpage
+def save_ct_npy(web_dir, visuals, image_path, width=256):
     image_dir = web_dir # page.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
     short_path = ntpath.basename(image_path[0]) ### testA1.dcm
     name = os.path.splitext(short_path)[0] ### testA1
@@ -50,20 +50,31 @@ def save_ct_npy(web_dir, visuals, image_path):
 
     for label, im_data in visuals.items():
         im_numpy = np.squeeze(util.tensor2ctim(im_data))
-        image_name = '%s_%s.npy' % (name, label)
+        image_name = '%s_%s.png' % (name, label)
         save_path = os.path.join(image_dir, image_name)
         # _, h, w = im.shape
         # if aspect_ratio > 1.0:
         #     im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
         # if aspect_ratio < 1.0:
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
-        np.save(save_path, im_numpy)
+        
+        # np.save(save_path, im_numpy)
+        if 'idt' in label:
+            if 'A' in label:
+                mean_str, std_str = util.save_ctB_images(im_numpy, save_path)
+            else:
+                mean_str, std_str = util.save_ctA_images(im_numpy, save_path)
+        else:
+            if 'A' in label:
+                mean_str, std_str = util.save_ctA_images(im_numpy, save_path)
+            else:
+                mean_str, std_str = util.save_ctB_images(im_numpy, save_path)
 
-        # util.save_ct_image(im, save_path)
-        # ims.append(image_name)
-        # txts.append(label)
-        # links.append(image_name)
-    # webpage.add_images(ims, txts, links, width=width)
+        util.save_cti_image(im_numpy, save_path, label)
+        ims.append(image_name)
+        txts.append(label + ', mean:' + ','.join(mean_i) + ', std:' + ','.join(std))
+        links.append(image_name)
+    webpage.add_images(ims, txts, links, width=width)
 
 class Visualizer():
     def __init__(self, opt):
