@@ -40,12 +40,12 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
 
 
 # save ct numpy arrays to npy, add to a webpage
-def save_ct_npy(web_dir, visuals, image_path, width=256):
-    image_dir = web_dir # page.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
+def save_ct_npy(webpage, visuals, image_path, width=256):
+    image_dir = webpage.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
     short_path = ntpath.basename(image_path[0]) ### testA1.dcm
     name = os.path.splitext(short_path)[0] ### testA1
 
-    # webpage.add_header(name)
+    webpage.add_header(name)
     ims, txts, links = [], [], []
 
     for label, im_data in visuals.items():

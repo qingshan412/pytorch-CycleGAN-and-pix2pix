@@ -32,6 +32,6 @@ if __name__ == '__main__':
         # if i % 5 == 0:
         print('processing (%04d)-th image... %s' % (i, img_path))
         # save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
-        save_ct_npy(web_dir, visuals, img_path, width=opt.display_winsize)
+        save_ct_npy(webpage, visuals, img_path, width=opt.display_winsize)
 
     # webpage.save()
