@@ -34,4 +34,4 @@ if __name__ == '__main__':
         # save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
         save_ct_npy(webpage, visuals, img_path, width=opt.display_winsize)
 
-    # webpage.save()
+    webpage.save()
