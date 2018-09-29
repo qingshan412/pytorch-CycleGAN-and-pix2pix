@@ -65,8 +65,8 @@ def save_ctA_image(image_numpy, image_path):
     currentAxis.add_patch(rect2)
     plt.savefig(image_path)
 
-    mean_str = [str(np.mean(image_numpy[50:50+40, 15:15+25])), str(np.mean(image_numpy[112:112+20, 18:18+18])), str(np.mean(image_numpy[230:230+20, 50:50+30]))]
-    std_str = [str(np.std(image_numpy[50:50+40, 15:15+25])), str(np.std(image_numpy[112:112+20, 18:18+18])), str(np.std(image_numpy[230:230+20, 50:50+30]))]
+    mean_str = [str(round(np.mean(image_numpy[50:50+40, 15:15+25]))), str(round(np.mean(image_numpy[112:112+20, 18:18+18]))), str(round(np.mean(image_numpy[230:230+20, 50:50+30])))]
+    std_str = [str(round(np.std(image_numpy[50:50+40, 15:15+25]))), str(round(np.std(image_numpy[112:112+20, 18:18+18]))), str(round(np.std(image_numpy[230:230+20, 50:50+30])))]
 
     return mean_str, std_str
 
@@ -81,8 +81,8 @@ def save_ctB_image(image_numpy, image_path):
     currentAxis.add_patch(rect2)
     plt.savefig(image_path)
 
-    mean_str = [str(np.mean(image_numpy[20:20+20, 60:60+40])), str(np.mean(image_numpy[70:70+15, 65:65+30])), str(np.mean(image_numpy[160:160+10, 225:225+25]))]
-    std_str = [str(np.std(image_numpy[20:20+20, 60:60+40])), str(np.std(image_numpy[70:70+15, 65:65+30])), str(np.std(image_numpy[160:160+10, 225:225+25]))]
+    mean_str = [str(round(np.mean(image_numpy[20:20+20, 60:60+40]))), str(round(np.mean(image_numpy[70:70+15, 65:65+30]))), str(round(np.mean(image_numpy[160:160+10, 225:225+25])))]
+    std_str = [str(round(np.std(image_numpy[20:20+20, 60:60+40]))), str(round(np.std(image_numpy[70:70+15, 65:65+30]))), str(round(np.std(image_numpy[160:160+10, 225:225+25])))]
 
     return mean_str, std_str
 

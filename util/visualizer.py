@@ -72,7 +72,7 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
 
         # util.save_cti_image(im_numpy, save_path, label)
         ims.append(image_name)
-        txts.append(label + ', mean:' + ','.join(mean_str) + ', std:' + ','.join(std_str))
+        txts.append(label + ', mean:' + ', '.join(mean_str) + ', std:' + ', '.join(std_str))
         links.append(image_name)
     webpage.add_images(ims, txts, links, width=width)
 
