@@ -56,6 +56,7 @@ def save_ct_image(image_numpy, image_path):
 
 def save_ctA_image(image_numpy, image_path):
     print('A')
+    plt.cla()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisA = plt.gca()
     rectA0 = patches.Rectangle((15, 50), 25, 40, linewidth=1, edgecolor='r', facecolor='none')
@@ -73,6 +74,7 @@ def save_ctA_image(image_numpy, image_path):
 
 def save_ctB_image(image_numpy, image_path):
     print('B')
+    plt.cla()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisB = plt.gca()
     rectB0 = patches.Rectangle((60, 20), 40, 20, linewidth=1, edgecolor='r', facecolor='none')
