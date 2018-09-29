@@ -55,7 +55,7 @@ def save_ct_image(image_numpy, image_path):
     plt.savefig(image_path)
 
 def save_ctA_image(image_numpy, image_path):
-    print('A')
+    # print('A')
     plt.cla()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisA = plt.gca()
@@ -73,7 +73,7 @@ def save_ctA_image(image_numpy, image_path):
     return mean_str, std_str
 
 def save_ctB_image(image_numpy, image_path):
-    print('B')
+    # print('B')
     plt.cla()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisB = plt.gca()
