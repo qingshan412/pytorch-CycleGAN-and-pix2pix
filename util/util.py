@@ -55,14 +55,15 @@ def save_ct_image(image_numpy, image_path):
     plt.savefig(image_path)
 
 def save_ctA_image(image_numpy, image_path):
+    print('A')
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxis = plt.gca()
-    rect0 = patches.Rectangle((15, 50), 25, 40, linewidth=1, edgecolor='r', facecolor='none')
-    rect1 = patches.Rectangle((18, 112), 18, 20, linewidth=1, edgecolor='r', facecolor='none')
-    rect2 = patches.Rectangle((50, 230), 30, 20, linewidth=1, edgecolor='r', facecolor='none')
-    currentAxis.add_patch(rect0)
-    currentAxis.add_patch(rect1)
-    currentAxis.add_patch(rect2)
+    rectA0 = patches.Rectangle((15, 50), 25, 40, linewidth=1, edgecolor='r', facecolor='none')
+    rectA1 = patches.Rectangle((18, 112), 18, 20, linewidth=1, edgecolor='r', facecolor='none')
+    rectA2 = patches.Rectangle((50, 230), 30, 20, linewidth=1, edgecolor='r', facecolor='none')
+    currentAxis.add_patch(rectA0)
+    currentAxis.add_patch(rectA1)
+    currentAxis.add_patch(rectA2)
     plt.savefig(image_path)
 
     mean_str = [str(round(np.mean(image_numpy[50:50+40, 15:15+25]))), str(round(np.mean(image_numpy[112:112+20, 18:18+18]))), str(round(np.mean(image_numpy[230:230+20, 50:50+30])))]
@@ -71,14 +72,15 @@ def save_ctA_image(image_numpy, image_path):
     return mean_str, std_str
 
 def save_ctB_image(image_numpy, image_path):
+    print('B')
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxis = plt.gca()
-    rect0 = patches.Rectangle((60, 20), 40, 20, linewidth=1, edgecolor='r', facecolor='none')
-    rect1 = patches.Rectangle((65, 70), 30, 15, linewidth=1, edgecolor='r', facecolor='none')
-    rect2 = patches.Rectangle((225, 160), 25, 10, linewidth=1, edgecolor='r', facecolor='none')
-    currentAxis.add_patch(rect0)
-    currentAxis.add_patch(rect1)
-    currentAxis.add_patch(rect2)
+    rectB0 = patches.Rectangle((60, 20), 40, 20, linewidth=1, edgecolor='r', facecolor='none')
+    rectB1 = patches.Rectangle((65, 70), 30, 15, linewidth=1, edgecolor='r', facecolor='none')
+    rectB2 = patches.Rectangle((225, 160), 25, 10, linewidth=1, edgecolor='r', facecolor='none')
+    currentAxis.add_patch(rectB0)
+    currentAxis.add_patch(rectB1)
+    currentAxis.add_patch(rectB2)
     plt.savefig(image_path)
 
     mean_str = [str(round(np.mean(image_numpy[20:20+20, 60:60+40]))), str(round(np.mean(image_numpy[70:70+15, 65:65+30]))), str(round(np.mean(image_numpy[160:160+10, 225:225+25])))]

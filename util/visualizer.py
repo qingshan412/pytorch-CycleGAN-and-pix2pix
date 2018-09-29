@@ -65,13 +65,10 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
             else:
                 mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
         else:
-            print(label)
             if 'A' in label:
                 mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
-                print('A')
             else:
                 mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
-                print('B')
 
         # util.save_cti_image(im_numpy, save_path, label)
         ims.append(image_name)
