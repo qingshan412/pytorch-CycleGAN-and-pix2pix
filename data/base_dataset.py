@@ -49,14 +49,7 @@ def get_transform(opt):
     else:
         raise ValueError('--resize_or_crop %s is not a valid option.' % opt.resize_or_crop)
 
-    if opt.resize_or_crop != 'ct_crop':
-        if opt.isTrain and not opt.no_flip:
-            transform_list.append(transforms.RandomHorizontalFlip())
-
-        transform_list += [transforms.ToTensor(),
-                        transforms.Normalize((0.5, 0.5, 0.5),
-                                                (0.5, 0.5, 0.5))]
-    else:
+    if opt.resize_or_crop == 'ct_crop':
         if opt.isTrain and not opt.no_flip:
             transform_list.append(transforms.Lambda(
                 lambda img: __ct_random_flip(img)))
@@ -65,6 +58,22 @@ def get_transform(opt):
                 lambda img: __ct_to_tensor(img)),
                         transforms.Lambda(
                 lambda img: __ct_normalize(img))]
+    # elif opt.resize_or_crop == 'one_crop':
+    #     if opt.isTrain and not opt.no_flip:
+    #         transform_list.append(transforms.Lambda(
+    #             lambda img: __ct_random_flip(img)))
+
+    #     transform_list += [transforms.Lambda(
+    #             lambda img: __ct_to_tensor(img)),]
+#                        transforms.Lambda(
+#                lambda img: __ct_normalize(img))]
+    else:
+        if opt.isTrain and not opt.no_flip:
+            transform_list.append(transforms.RandomHorizontalFlip())
+
+        transform_list += [transforms.ToTensor(),
+                        transforms.Normalize((0.5, 0.5, 0.5),
+                                                (0.5, 0.5, 0.5))]
 
     return transforms.Compose(transform_list)
 
@@ -121,6 +130,8 @@ def __print_size_warning(ow, oh, w, h):
 
 def __ct_random_crop(img, target_size):
     # print(type(img))
+    if np.max(img) > 1:
+        img = img/65535.
     ow, oh = img.shape
     
     ### input is supposed to be a float32 [0,1] numpy array here

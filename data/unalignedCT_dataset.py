@@ -39,8 +39,8 @@ class UnalignedCTDataset(BaseDataset):
         ### uint16 to float32 to [0, 1]
         # A_img = pydicom.dcmread(A_path).pixel_array.astype(np.float32)/65535.
         # B_img = pydicom.dcmread(B_path).pixel_array.astype(np.float32)/65535.
-        A_img = np.load(A_path).astype(np.float32)/65535.
-        B_img = np.load(B_path).astype(np.float32)/65535.
+        A_img = np.load(A_path).astype(np.float32)#/65535.
+        B_img = np.load(B_path).astype(np.float32)#/65535.
 
         # A_img = Image.open(A_path).convert('RGB')
         # B_img = Image.open(B_path).convert('RGB')
