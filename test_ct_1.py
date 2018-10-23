@@ -9,7 +9,7 @@ from util import html
 if __name__ == '__main__':
     opt = TestOptions().parse()
     opt.num_threads = 1   # test code only supports num_threads = 1
-    opt.batch_size = 1  # test code only supports batch_size = 1
+    opt.batch_size = 4  # test code only supports batch_size = 1
     opt.serial_batches = True  # no shuffle
     opt.no_flip = True  # no flip
     opt.display_id = -1  # no visdom display
