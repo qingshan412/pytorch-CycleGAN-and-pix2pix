@@ -59,10 +59,13 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         
         # np.save(save_path, im_numpy)
-        if label in ['real_A', 'fake_B', 'rec_A', 'idt_B']:
-            mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
+        if name.split('+')[0] != "fbp":
+            mean_str, std_str = util.save_ctABo_image(im_numpy, savepath)
         else:
-            mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
+            if label in ['real_A', 'fake_B', 'rec_A', 'idt_B']:
+                mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
+            else:
+                mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
         
 
         # util.save_cti_image(im_numpy, save_path, label)

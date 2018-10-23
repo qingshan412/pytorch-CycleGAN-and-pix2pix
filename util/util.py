@@ -72,6 +72,24 @@ def save_ctA_image(image_numpy, image_path):
 
     return mean_str, std_str
 
+def save_ctABo_image(image_numpy, image_path):
+    # print('A')
+    plt.cla()
+    plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    currentAxisA = plt.gca()
+    rectA0 = patches.Rectangle((15, 50), 20, 25, linewidth=1, edgecolor='r', facecolor='none')
+    rectA1 = patches.Rectangle((25, 112), 18, 20, linewidth=1, edgecolor='r', facecolor='none')
+    rectA2 = patches.Rectangle((100, 8), 25, 25, linewidth=1, edgecolor='r', facecolor='none')
+    currentAxisA.add_patch(rectA0)
+    currentAxisA.add_patch(rectA1)
+    currentAxisA.add_patch(rectA2)
+    plt.savefig(image_path)
+
+    mean_str = [str(round(np.mean(image_numpy[50:50+25, 15:15+20]),2)), str(round(np.mean(image_numpy[112:112+20, 25:25+18]),2)), str(round(np.mean(image_numpy[8:8+25, 100:100+25]),2))]
+    std_str = [str(round(np.std(image_numpy[50:50+25, 15:15+20]),2)), str(round(np.std(image_numpy[112:112+20, 25:25+18]),2)), str(round(np.std(image_numpy[8:8+25, 100:100+25]),2))]
+
+    return mean_str, std_str
+
 def save_ctB_image(image_numpy, image_path):
     # print('B')
     plt.cla()
