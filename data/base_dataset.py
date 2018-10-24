@@ -130,8 +130,8 @@ def __print_size_warning(ow, oh, w, h):
 
 def __ct_random_crop(img, target_size):
     # print(type(img))
-    if np.max(img) > 1:
-        img = img/65535.
+    # if np.max(img) > 5:
+    #     img = img/65535.
     ow, oh = img.shape
     
     ### input is supposed to be a float32 [0,1] numpy array here
