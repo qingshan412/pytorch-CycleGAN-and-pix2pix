@@ -129,7 +129,7 @@ def __print_size_warning(ow, oh, w, h):
         __print_size_warning.has_printed = True
 
 def __ct_random_crop(img, target_size):
-    # print(type(img))
+    print(np.max(img))
     if np.max(img) > 2:
         img = img/65535.
     elif np.max(img) > 1:
