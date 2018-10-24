@@ -11,6 +11,8 @@
 # python test_ct_1.py --dataroot ./datasets/tw_np_one --name twnpo_cyclegan_batch4 --model cycle_gan
 python train_ct.py --dataroot ./datasets/tw_np_one --name twnpo_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 100 --niter_decay 100 --display_id -1 --gpu_ids 1 > rec/twnpo_cyclegan_batch4_epoch100_html_rec
 
+python train_ct.py --dataroot ./datasets/tw_np_one --name twnpot_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/twnpot_cyclegan_batch4_html_rec
+nohup python train_ct.py --dataroot ./datasets/tw_np_one --name twnpot_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/twnpot_cyclegan_batch4_html_rec &
 #####################################dcm
 ### batch4
 # python train.py --dataroot ./datasets/ctest --name ctest_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --no_html > rec/ctest_cyclegan_batch4_rec
