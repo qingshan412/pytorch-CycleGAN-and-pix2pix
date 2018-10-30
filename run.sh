@@ -6,6 +6,10 @@
 # python train_ct.py --dataroot ./datasets/tw_np_all --name twnpa_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnpa_cyclegan_batch4_html_rec
 # python test_ct_1.py --dataroot ./datasets/tw_np_all --name twnpa_cyclegan_batch4 --model cycle_gan --serial_batches
 
+### all tw dataset filtering test out + active learning
+# python train_al.py --dataroot ./datasets/tw_np_all --name twnpa_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnpa_cyclegan_batch4_html_rec
+# python test_ct_al.py --dataroot ./datasets/tw_np_all --name twnpa_cyclegan_batch4 --model cycle_gan --serial_batches
+
 ### one tw dataset
 # python train_ct.py --dataroot ./datasets/tw_np_one --name twnpo_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnpo_cyclegan_batch4_html_rec
 # python test_ct_1.py --dataroot ./datasets/tw_np_one --name twnpo_cyclegan_batch4 --model cycle_gan

@@ -8,8 +8,8 @@ from util.visualizer import Visualizer
 if __name__ == '__main__':
     opt = TrainOptions().parse()
     print(opt.phase)
-    opt = TestOptions().parse()
-    print(opt.phase)
+    # opt = TestOptions().parse()
+    # print(opt.phase)
     exit(0)
     ### data
     opt = TrainOptions().parse()
