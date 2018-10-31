@@ -1,3 +1,6 @@
+#####################################C_test
+python train_ct_3.py --dataroot ./datasets/tw_np_all --name twnpac_cycleganc_batch4 --dataset_mode unalignedC --model cycle_gan_c --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/twnpac_cycleganc_batch4_html_rec &
+
 #####################################npy
 ### partial tw dataset
 # python train_ct.py --dataroot ./datasets/tw_np --name twnp_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/twnp_cyclegan_batch4_html_rec
