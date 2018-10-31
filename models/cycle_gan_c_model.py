@@ -29,7 +29,7 @@ class CycleGANcModel(BaseModel):
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
         visual_names_A = ['real_A', 'fake_B', 'rec_A']
         visual_names_B = ['real_B', 'fake_A', 'rec_B']
-        visual_names_C = ['real_C', 'fake_C_A', 'fack_C_B', 'rec_C_A', 'rec_C_B']
+        visual_names_C = ['real_C', 'fake_C_A', 'fake_C_B', 'rec_C_A', 'rec_C_B']
         if self.isTrain and self.opt.lambda_identity > 0.0:
             visual_names_A.append('idt_A')
             visual_names_B.append('idt_B')
