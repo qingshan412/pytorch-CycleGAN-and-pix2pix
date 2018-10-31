@@ -146,7 +146,7 @@ class CycleGANModel(BaseModel):
         lambda_B = self.opt.lambda_B
         lambda_C = self.opt.lambda_C
         # Identity loss
-         if lambda_idt > 0:
+        if lambda_idt > 0:
             # G_A should be identity if real_B is fed.
             self.idt_A = self.netG_A(self.real_C)
             self.loss_idt_A = self.criterionIdt(self.idt_A, self.real_C) * lambda_C * lambda_idt
