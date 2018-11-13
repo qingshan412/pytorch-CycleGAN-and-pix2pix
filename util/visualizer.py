@@ -58,7 +58,7 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         # if aspect_ratio < 1.0:
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         
-        # np.save(save_path, im_numpy)
+        np.save(os.path.join(image_dir, '%s_%s.npy' % (name, label)), im_numpy)
         if name.split('+')[0] != "fbp":
             mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
         else:
