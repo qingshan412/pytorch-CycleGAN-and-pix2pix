@@ -17,8 +17,8 @@ python test_ct_2.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_c
 python train_ct.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/decouple_ac200_cyclegan_batch4_html_rec
 python train_ct.py --dataroot ./datasets/decouple_CD200 --name decouple_cd200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/decouple_cd200_cyclegan_batch4_html_rec
 python train_ct.py --dataroot ./datasets/decouple_DB200 --name decouple_db200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/decouple_db200_cyclegan_batch4_html_rec
-python test_ct_2.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch4 --model cycle_gan --serial_batches
-python test_ct_2.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan_batch4 --model cycle_gan --serial_batches
+python test_ct_2.py --dataroot ./datasets/decouple_CD200 --name decouple_cd200_cyclegan_batch4 --model cycle_gan --serial_batches
+python test_ct_2.py --dataroot ./datasets/decouple_DB200 --name decouple_db200_cyclegan_batch4 --model cycle_gan --serial_batches
 
 #####################################npy
 ### partial tw dataset

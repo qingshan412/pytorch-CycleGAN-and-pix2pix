@@ -49,6 +49,10 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
     ims, txts, links = [], [], []
 
     for label, im_data in visuals.items():
+        print(label)
+    exit(0)
+
+    for label, im_data in visuals.items():
         im_numpy = np.squeeze(util.tensor2ctim(im_data))
         image_name = '%s_%s.png' % (name, label)
         save_path = os.path.join(image_dir, image_name)
