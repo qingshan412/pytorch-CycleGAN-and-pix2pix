@@ -4,7 +4,7 @@ from data.image_folder import make_dataset
 from PIL import Image
 
 
-class SingleDataset(BaseDataset):
+class SingleCTDataset(BaseDataset):
     @staticmethod
     def modify_commandline_options(parser, is_train):
         return parser
