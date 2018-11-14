@@ -62,7 +62,7 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         if name.split('+')[0] != "fbp":
             mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
         else:
-            if label in ['real_A', 'fake_B', 'rec_A', 'idt_B']:
+            if label in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
                 mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
             else:
                 mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
