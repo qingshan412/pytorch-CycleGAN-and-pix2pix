@@ -135,17 +135,17 @@ class CycleGANcModel(BaseModel):
         return loss_D
 
     def backward_D_A(self):
-        fake_A_C = self.fake_B_pool.query(self.fake_A_C)
+        fake_A_C = self.fake_A_C_pool.query(self.fake_A_C)
         self.loss_D_A_C = self.backward_D_basic(self.netD_A, self.real_A, fake_A_C)
 
-        fake_A_B = self.fake_B_pool.query(self.fake_A_B)
+        fake_A_B = self.fake_A_B_pool.query(self.fake_A_B)
         self.loss_D_A_B = self.backward_D_basic(self.netD_A, self.real_A, fake_A_B)
 
     def backward_D_B(self):
-        fake_B_C = self.fake_A_pool.query(self.fake_B_C)
+        fake_B_C = self.fake_B_C_pool.query(self.fake_B_C)
         self.loss_D_B_C = self.backward_D_basic(self.netD_B, self.real_B, fake_B_C)
 
-        fake_B_A = self.fake_A_pool.query(self.fake_B_A)
+        fake_B_A = self.fake_B_A_pool.query(self.fake_B_A)
         self.loss_D_B_A = self.backward_D_basic(self.netD_B, self.real_B, fake_B_A)
 
     def backward_D_C(self):
