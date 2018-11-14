@@ -1,8 +1,9 @@
 import os.path
 from data.base_dataset import BaseDataset, get_transform
 from data.image_folder import make_ct_dataset
-from PIL import Image
+# from PIL import Image
 
+import numpy as np
 
 class SingleCTDataset(BaseDataset):
     @staticmethod
