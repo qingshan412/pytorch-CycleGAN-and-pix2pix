@@ -81,7 +81,7 @@ class CycleGANcModel(BaseModel):
             self.criterionCycle = torch.nn.L1Loss()
             self.criterionIdt = torch.nn.L1Loss()
             # initialize optimizers
-            self.optimizer_G = torch.optim.Adam(itertools.chain(self.netG_A.parameters(), self.netG_B.parameters(), 
+            self.optimizer_G = torch.optim.Adam(itertools.chain(self.netG_A_C.parameters(), self.netG_B_C.parameters(), 
                                                 self.netG_C_A.parameters(), self.netG_C_B.parameters()),
                                                 lr=opt.lr, betas=(opt.beta1, 0.999))
             self.optimizer_D = torch.optim.Adam(itertools.chain(self.netD_A.parameters(), self.netD_B.parameters(), 
