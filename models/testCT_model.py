@@ -3,7 +3,7 @@ from . import networks
 from .cycle_gan_model import CycleGANModel
 
 
-class TestModel(BaseModel):
+class TestCTModel(BaseModel):
     def name(self):
         return 'TestModel'
 
