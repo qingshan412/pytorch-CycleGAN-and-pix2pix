@@ -38,6 +38,39 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
         links.append(image_name)
     webpage.add_images(ims, txts, links, width=width)
 
+# save ct numpy arrays to npy
+def save_ct2npy(web_dir, visuals, image_path):#webpage, , width=256
+    image_dir = os.path.join(web_dir, 'npys')#webpage.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
+    short_path = ntpath.basename(image_path[0]) ### testA1.dcm
+    name = os.path.splitext(short_path)[0] ### testA1
+
+    # webpage.add_header(name)
+    # ims, txts, links = [], [], []
+
+    for label, im_data in visuals.items():
+        im_numpy = np.squeeze(util.tensor2ctim(im_data))
+        # image_name = '%s_%s.png' % (name, label)
+        # save_path = os.path.join(image_dir, image_name)
+        # _, h, w = im.shape
+        # if aspect_ratio > 1.0:
+        #     im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
+        # if aspect_ratio < 1.0:
+        #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
+        np.save(os.path.join(image_dir, '%s_%s.npy' % (name, label)), im_numpy)
+        # if name.split('+')[0] != "fbp":
+        #     mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
+        # else:
+        #     if label in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
+        #         mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
+        #     else:
+        #         mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
+        
+
+        # util.save_cti_image(im_numpy, save_path, label)
+    #     ims.append(image_name)
+    #     txts.append(label + ', mean:' + ', '.join(mean_str) + ', std:' + ', '.join(std_str))
+    #     links.append(image_name)
+    # webpage.add_images(ims, txts, links, width=width)
 
 # save ct numpy arrays to npy, add to a webpage
 def save_ct_npy(webpage, visuals, image_path, width=256):
