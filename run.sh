@@ -6,6 +6,7 @@ python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cycleganc_ba
 
 python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_batch4_html_rec 
 python test_ct_2.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --serial_batches
+python ProdFake.py --dataroot ./datasets/tw_np_200_fake --name twnp200_cyclegan_batch4 --model testCT --serial_batches
 
 python train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 > rec/twnp200c_cyclegancl_batch2_html_rec &
 python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --serial_batches

@@ -39,8 +39,13 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
     webpage.add_images(ims, txts, links, width=width)
 
 # save ct numpy arrays to npy
-def save_ct2npy(web_dir, visuals, image_path):#webpage, , width=256
+def save_ct2npy(web_dir, visuals, image_path):
+    #webpage, , width=256
+    # if not os.path.exists(web_dir):
+        # os.makedirs(web_dir)
     image_dir = os.path.join(web_dir, 'npys')#webpage.get_image_dir() ### ./results/ctest_cyclegan/test_[epoch]
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
     short_path = ntpath.basename(image_path[0]) ### testA1.dcm
     name = os.path.splitext(short_path)[0] ### testA1
 
