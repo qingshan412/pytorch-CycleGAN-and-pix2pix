@@ -25,8 +25,8 @@ class CycleGANclModel(BaseModel):
         BaseModel.initialize(self, opt)
 
         # specify the training losses you want to print out. The program will call base_model.get_current_losses
-        self.loss_names = ['D_A_B', 'G_A', 'cycle_A', 'idt_A', 'D_B_A', 'G_B', 'cycle_B', 'idt_B', 'D_C_A', 'D_C_B', 'G_C', 'cycle_C', 'idt_C']
-        # 'D_A_C', 'D_B_C', 
+        self.loss_names = ['D_A_B', 'G_A', 'cycle_A', 'idt_A', 'D_B_A', 'G_B', 'cycle_B', 'idt_B', 'D_C_A', 'D_C_B', 'G_C', 'idt_C']
+        # 'D_A_C', 'D_B_C', , 'cycle_C'
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
         visual_names_A = ['real_A', 'fake_B_A', 'rec_A_B', 'fake_C_A']#, 'rec_A_C']
         visual_names_B = ['real_B', 'fake_A_B', 'rec_B_A', 'fake_C_B']#, 'rec_B_C']
@@ -194,9 +194,9 @@ class CycleGANclModel(BaseModel):
         # Backward cycle loss
         self.loss_cycle_B = self.criterionCycle(self.rec_B_A, self.real_B) * lambda_B# + self.criterionCycle(self.rec_B_C, self.real_B) * lambda_B
         # Backward cycle loss
-        self.loss_cycle_C = (self.criterionCycle(self.rec_C_A, self.real_C) * lambda_C + self.criterionCycle(self.rec_C_B, self.real_C) * lambda_C)/2.
+        # self.loss_cycle_C = self.criterionCycle(self.rec_C_A, self.real_C) * lambda_C + self.criterionCycle(self.rec_C_B, self.real_C) * lambda_C
         # combined loss
-        self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_G_C + self.loss_cycle_A + self.loss_cycle_B + self.loss_cycle_C + self.loss_idt
+        self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_G_C + self.loss_cycle_A + self.loss_cycle_B + self.loss_idt# + self.loss_cycle_C
         self.loss_G.backward()
         # if lambda_idt > 0:
         #     # G_A should be identity if real_B is fed.
