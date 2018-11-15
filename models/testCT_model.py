@@ -13,7 +13,7 @@ class TestCTModel(BaseModel):
         parser = CycleGANModel.modify_commandline_options(parser, is_train=False)
         parser.set_defaults(dataset_mode='singleCT')
 
-        parser.add_argument('--model_suffix', type=str, default='',
+        parser.add_argument('--model_suffix', type=str, default='_A',
                             help='In checkpoints_dir, [epoch]_net_G[model_suffix].pth will'
                             ' be loaded as the generator of TestModel')
 
@@ -28,6 +28,7 @@ class TestCTModel(BaseModel):
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
         self.visual_names = ['real_A', 'fake_B']
         # specify the models you want to save to the disk. The program will call base_model.save_networks and base_model.load_networks
+        # opt.model_suffix = '_A' if opt.direction == 'AtoB' else '_B'
         self.model_names = ['G' + opt.model_suffix]
 
         self.netG = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG,
