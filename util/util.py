@@ -53,7 +53,12 @@ def save_image(image_numpy, image_path):
 def save_ct_image(image_numpy, image_path):
     plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
-    plt.axis('off')
+    # plt.axis('off')
+    currentAxisA = plt.gca()
+    currentAxisA.axes.get_xaxis().set_visible(False)
+    currentAxisA.axes.get_yaxis().set_visible(False)
+    currentAxisA.spines['left'].set_color('none')
+    currentAxisA.spines['bottom'].set_color('none')
     plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = ' '
@@ -63,7 +68,7 @@ def save_ct_image(image_numpy, image_path):
 
 def save_ctA_image(image_numpy, image_path):
     # print('A')
-    plt.cla()
+    plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisA = plt.gca()
     rectA0 = patches.Rectangle((15, 50), 25, 40, linewidth=1, edgecolor='r', facecolor='none')
@@ -72,7 +77,11 @@ def save_ctA_image(image_numpy, image_path):
     currentAxisA.add_patch(rectA0)
     currentAxisA.add_patch(rectA1)
     currentAxisA.add_patch(rectA2)
-    plt.axis('off')
+    # plt.axis('off')
+    currentAxisA.axes.get_xaxis().set_visible(False)
+    currentAxisA.axes.get_yaxis().set_visible(False)
+    currentAxisA.spines['left'].set_color('none')
+    currentAxisA.spines['bottom'].set_color('none')
     plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[50:50+40, 15:15+25]),2)), str(round(np.mean(image_numpy[112:112+20, 18:18+18]),2)), str(round(np.mean(image_numpy[230:230+20, 50:50+30]),2))]
@@ -82,7 +91,7 @@ def save_ctA_image(image_numpy, image_path):
 
 def save_ctABo_image(image_numpy, image_path):
     # print('A')
-    plt.cla()
+    plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisA = plt.gca()
     rectA0 = patches.Rectangle((15, 50), 20, 25, linewidth=1, edgecolor='r', facecolor='none')
@@ -91,7 +100,11 @@ def save_ctABo_image(image_numpy, image_path):
     currentAxisA.add_patch(rectA0)
     currentAxisA.add_patch(rectA1)
     currentAxisA.add_patch(rectA2)
-    plt.axis('off')
+    # plt.axis('off')
+    currentAxisA.axes.get_xaxis().set_visible(False)
+    currentAxisA.axes.get_yaxis().set_visible(False)
+    currentAxisA.spines['left'].set_color('none')
+    currentAxisA.spines['bottom'].set_color('none')
     plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[50:50+25, 15:15+20]),2)), str(round(np.mean(image_numpy[112:112+20, 25:25+18]),2)), str(round(np.mean(image_numpy[8:8+25, 100:100+25]),2))]
@@ -101,7 +114,7 @@ def save_ctABo_image(image_numpy, image_path):
 
 def save_ctB_image(image_numpy, image_path):
     # print('B')
-    plt.cla()
+    plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     currentAxisB = plt.gca()
     rectB0 = patches.Rectangle((60, 20), 40, 20, linewidth=1, edgecolor='r', facecolor='none')
@@ -110,7 +123,11 @@ def save_ctB_image(image_numpy, image_path):
     currentAxisB.add_patch(rectB0)
     currentAxisB.add_patch(rectB1)
     currentAxisB.add_patch(rectB2)
-    plt.axis('off')
+    # plt.axis('off')
+    currentAxisA.axes.get_xaxis().set_visible(False)
+    currentAxisA.axes.get_yaxis().set_visible(False)
+    currentAxisA.spines['left'].set_color('none')
+    currentAxisA.spines['bottom'].set_color('none')
     plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[20:20+20, 60:60+40]),2)), str(round(np.mean(image_numpy[70:70+15, 65:65+30]),2)), str(round(np.mean(image_numpy[160:160+10, 225:225+25]),2))]
