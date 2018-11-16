@@ -124,10 +124,10 @@ def save_ctB_image(image_numpy, image_path):
     currentAxisB.add_patch(rectB1)
     # currentAxisB.add_patch(rectB2)
     # plt.axis('off')
-    currentAxisA.axes.get_xaxis().set_visible(False)
-    currentAxisA.axes.get_yaxis().set_visible(False)
-    currentAxisA.spines['left'].set_color('none')
-    currentAxisA.spines['bottom'].set_color('none')
+    currentAxisB.axes.get_xaxis().set_visible(False)
+    currentAxisB.axes.get_yaxis().set_visible(False)
+    currentAxisB.spines['left'].set_color('none')
+    currentAxisB.spines['bottom'].set_color('none')
     plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[20:20+20, 60:60+40]),2)), str(round(np.mean(image_numpy[70:70+15, 65:65+30]),2)), str(round(np.mean(image_numpy[160:160+10, 225:225+25]),2))]
