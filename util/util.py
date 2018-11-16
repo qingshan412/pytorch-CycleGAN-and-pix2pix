@@ -53,7 +53,7 @@ def save_image(image_numpy, image_path):
 def save_ct_image(image_numpy, image_path):
     plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
-    plt.savefig(image_path, bbox_inches='tight')
+    plt.savefig(image_path, ,bbox_inches='tight')
 
     mean_str = ' '
     std_str = ' '
