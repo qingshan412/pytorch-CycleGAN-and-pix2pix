@@ -51,7 +51,7 @@ def save_image(image_numpy, image_path):
     image_pil.save(image_path)
 
 def save_ct_image(image_numpy, image_path):
-    plt.cla()
+    plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     plt.savefig(image_path)
 
