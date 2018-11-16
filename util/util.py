@@ -51,8 +51,14 @@ def save_image(image_numpy, image_path):
     image_pil.save(image_path)
 
 def save_ct_image(image_numpy, image_path):
+    plt.cla()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     plt.savefig(image_path)
+
+    mean_str = ' '
+    std_str = ' '
+
+    return mean_str, std_str
 
 def save_ctA_image(image_numpy, image_path):
     # print('A')

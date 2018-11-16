@@ -98,7 +98,10 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         
         np.save(os.path.join(image_dir, '%s_%s.npy' % (name, label)), im_numpy)
         if name.split('+')[0] != "fbp":
-            mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
+            if name.split('_')[0] != "199" and name.split('_')[0] != "200":
+                mean_str, std_str = util.save_ct_image(im_numpy, save_path)
+            else:
+                mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
         else:
             if label in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
                 mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
