@@ -71,7 +71,7 @@ def save_ctA_image(image_numpy, image_path):
     currentAxisA.add_patch(rectA0)
     currentAxisA.add_patch(rectA1)
     currentAxisA.add_patch(rectA2)
-    plt.savefig(image_path)
+    plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[50:50+40, 15:15+25]),2)), str(round(np.mean(image_numpy[112:112+20, 18:18+18]),2)), str(round(np.mean(image_numpy[230:230+20, 50:50+30]),2))]
     std_str = [str(round(np.std(image_numpy[50:50+40, 15:15+25]),2)), str(round(np.std(image_numpy[112:112+20, 18:18+18]),2)), str(round(np.std(image_numpy[230:230+20, 50:50+30]),2))]
@@ -89,7 +89,7 @@ def save_ctABo_image(image_numpy, image_path):
     currentAxisA.add_patch(rectA0)
     currentAxisA.add_patch(rectA1)
     currentAxisA.add_patch(rectA2)
-    plt.savefig(image_path)
+    plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[50:50+25, 15:15+20]),2)), str(round(np.mean(image_numpy[112:112+20, 25:25+18]),2)), str(round(np.mean(image_numpy[8:8+25, 100:100+25]),2))]
     std_str = [str(round(np.std(image_numpy[50:50+25, 15:15+20]),2)), str(round(np.std(image_numpy[112:112+20, 25:25+18]),2)), str(round(np.std(image_numpy[8:8+25, 100:100+25]),2))]
@@ -107,7 +107,7 @@ def save_ctB_image(image_numpy, image_path):
     currentAxisB.add_patch(rectB0)
     currentAxisB.add_patch(rectB1)
     currentAxisB.add_patch(rectB2)
-    plt.savefig(image_path)
+    plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
 
     mean_str = [str(round(np.mean(image_numpy[20:20+20, 60:60+40]),2)), str(round(np.mean(image_numpy[70:70+15, 65:65+30]),2)), str(round(np.mean(image_numpy[160:160+10, 225:225+25]),2))]
     std_str = [str(round(np.std(image_numpy[20:20+20, 60:60+40]),2)), str(round(np.std(image_numpy[70:70+15, 65:65+30]),2)), str(round(np.std(image_numpy[160:160+10, 225:225+25]),2))]
