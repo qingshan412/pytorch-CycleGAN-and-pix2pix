@@ -7,16 +7,16 @@
 # python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan6c_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_6blocks --serial_batches
 # python train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan6c_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_6blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200c_cyclegan6c_batch2_html_rec &
 
-python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4c_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --serial_batches
+# python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4c_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --serial_batches
 # python train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan6c_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200c_cyclegan6c_batch2_html_rec &
 #####################################Original
 # python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_idt0_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_idt0_batch4_html_rec
 # python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_batch4_html_rec 
 # python test_ct_2.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --serial_batches
 # python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch2 --model cycle_gan --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_batch2_html_rec 
-python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_iter50_batch2 --model cycle_gan --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_iter50_batch2_html_rec
-python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_idt0_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_idt0_batch4_html_rec
-python test_ct_2.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch2 --model cycle_gan --serial_batches
+# python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_iter50_batch2 --model cycle_gan --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_iter50_batch2_html_rec
+# python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_idt0_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_idt0_batch4_html_rec
+python test_ct_2.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_iter50_batch2 --model cycle_gan --serial_batches
 #####################################Fake_train
 # python ProdFake.py --dataroot ./datasets/tw_np_200_fake --name twnp200_cyclegan_batch4 --model testCT --serial_batches
 # python train_ct.py --dataroot ./datasets/tw_np_200_fake --name twnp200fake_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200fake_cyclegan_batch4_html_rec 
@@ -24,7 +24,9 @@ python test_ct_2.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batc
 
 #####################################One_large_cycle
 # python train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 > rec/twnp200c_cyclegancl_batch2_html_rec &
-python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --serial_batches
+# python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --serial_batches
+# python train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4cl_batch2 --dataset_mode unalignedC --netG resnet_4blocks --model cycle_gan_cl --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 > rec/twnp200c_cyclegan4cl_batch2_html_rec &
+python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4cl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --serial_batches
 
 # python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_batch4_html_rec
 #####################################C_decouple
@@ -33,9 +35,10 @@ python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegancl_b
 # python test_ct_2.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch4 --model cycle_gan --serial_batches
 # python test_ct_2.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan_batch4 --model cycle_gan --serial_batches
 
-python train_ct.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 > rec/decouple_ac200_cyclegan_iter50_batch2_html_rec
-python train_ct.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 > rec/decouple_cb200_cyclegan_iter50_batch2_html_rec
-# python test_ct_2.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch2 --model cycle_gan --serial_batches
+# python train_ct.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 > rec/decouple_ac200_cyclegan_iter50_batch2_html_rec
+# python train_ct.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 50 --niter_decay 50 --display_id -1 > rec/decouple_cb200_cyclegan_iter50_batch2_html_rec
+# python test_ct_2.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --serial_batches
+# python test_ct_2.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan4_iter50_batch2 --model cycle_gan --netG resnet_4blocks --serial_batches
 # python test_ct_2.py --dataroot ./datasets/decouple_CB200 --name decouple_cb200_cyclegan_batch2 --model cycle_gan --serial_batches
 
 # python train_ct.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/decouple_ac200_cyclegan_batch4_html_rec
