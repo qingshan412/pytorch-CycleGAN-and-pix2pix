@@ -36,7 +36,17 @@ while 1:
             if flag:
                 i = 8
                 while i < len(line):
-                    name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
+                    if line[i][0].upper == 'D':
+                        if 'cycleganc' in args.SourceDir:
+                            name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
+                        elif 'decouple_cb200' in args.SourceDir:
+                            name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Z').replace('B', 'Y')
+                        elif 'decouple_ac200' in args.SourceDir:
+                            name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Z').replace('B', 'X')
+                        else:
+                            name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Y').replace('B', 'X')
+                    else:
+                        name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
                     idx_name.append(name_i)
                     losses[name_i] = []
                     i += 2
