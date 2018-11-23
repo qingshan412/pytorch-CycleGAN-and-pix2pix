@@ -43,4 +43,5 @@ for i in range(len(idx_name)):
 # plt.plot(g_loss, 'go', label='g_loss')
 plt.legend()
 plt.title(args.SourceDir)
-plt.show()
+plt.savefig('./loss_plot/' + args.SourceDir + '.png')
+# plt.show()
