@@ -36,7 +36,7 @@ while 1:
             if flag:
                 i = 8
                 while i < len(line):
-                    idx_name.append(line[i])
+                    idx_name.append(line[i][:-1])
                     losses[line[i]] = []
                     i += 2
                 flag = 0
