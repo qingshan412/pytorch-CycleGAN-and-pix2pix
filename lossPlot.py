@@ -50,7 +50,7 @@ for i in range(len(idx_name)):
     plt.plot(losses[idx_name[i]], label=idx_name[i])
 # plt.plot(d_loss, 'ro', label='d_loss')
 # plt.plot(g_loss, 'go', label='g_loss')
-plt.legend(loc='EastOutside')
+plt.legend(loc='best')
 plt.title(args.SourceDir)
 plt.savefig('./loss_plot/' + args.SourceDir + '.png')
 # plt.show()
