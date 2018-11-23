@@ -58,7 +58,7 @@ while 1:
 plt.figure()
 for i in range(len(idx_name)):
     if i > 9:
-        plt.plot(losses[idx_name[i]], '-x', label=idx_name[i])
+        plt.plot(losses[idx_name[i]], '--', label=idx_name[i])
     else:
         plt.plot(losses[idx_name[i]], label=idx_name[i])
 # plt.plot(d_loss, 'ro', label='d_loss')
