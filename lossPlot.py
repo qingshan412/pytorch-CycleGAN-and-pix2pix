@@ -36,7 +36,7 @@ while 1:
             if flag:
                 i = 8
                 while i < len(line):
-                    if line[i][0].upper == 'D':
+                    if line[i][0].upper == 'D' or line[i][0].upper == 'G':
                         if 'cycleganc' in args.SourceDir:
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
                         elif 'decouple_cb200' in args.SourceDir:
@@ -57,7 +57,10 @@ while 1:
 
 plt.figure()
 for i in range(len(idx_name)):
-    plt.plot(losses[idx_name[i]], label=idx_name[i])
+    if i > 9:
+        plt.plot(losses[idx_name[i]], label=idx_name[i], '-x')
+    else:
+        plt.plot(losses[idx_name[i]], label=idx_name[i])
 # plt.plot(d_loss, 'ro', label='d_loss')
 # plt.plot(g_loss, 'go', label='g_loss')
 plt.legend(ncol=2)
