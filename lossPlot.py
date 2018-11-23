@@ -19,13 +19,13 @@ LogPath = path.join('./checkpoints', args.SourceDir, 'loss_log.txt')
 # Files = [ f for f in listdir(PicPath) if path.isfile(path.join(LogPath,f))]
 
 # for Fic in Files:
-idx_name = ['D_A', 'G_A', 'cycle_A', 'idt_A', 'D_B', 'G_B', 'cycle_B', 'idt_B']
+# idx_name = ['D_A', 'G_A', 'cycle_A', 'idt_A', 'D_B', 'G_B', 'cycle_B', 'idt_B']
+idx_name = []
 losses = {}
-for i in range(len(idx_name)):
-    losses[idx_name[i]] = []
 
 print('Reading from ' + LogPath + '...')
 fo = open(LogPath)
+flag = 1
 while 1:
     lines = fo.readlines(10000)
     if not lines:
@@ -33,6 +33,14 @@ while 1:
     for line in lines:
         line = line.strip().split(' ')
         if len(line) > 20:
+            if flag:
+                i = 8
+                while i < len(line):
+                    idx_name.append(line[i])
+                    losses[line[i]] = []
+                    i += 2
+                flag = 0
+            
             for i in range(len(idx_name)):
                 losses[idx_name[i]].append(float(line[2*i+9]))
 
