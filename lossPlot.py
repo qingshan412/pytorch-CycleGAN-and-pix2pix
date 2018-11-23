@@ -51,7 +51,7 @@ for i in range(len(idx_name)):
 # plt.plot(d_loss, 'ro', label='d_loss')
 # plt.plot(g_loss, 'go', label='g_loss')
 # plt.legend(loc='upper right')
-plt.legend(bbox_to_anchor=(plt.xlim()[1], plt.ylim()[1])
+plt.legend(bbox_to_anchor=(plt.xlim()[1], plt.ylim()[1]))
 # plt.title(args.SourceDir)
 plt.savefig('./loss_plot/' + args.SourceDir + '.png')
 # plt.show()
