@@ -36,7 +36,7 @@ while 1:
             if flag:
                 i = 8
                 while i < len(line):
-                    name_i = line[i][:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
+                    name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
                     idx_name.append(name_i)
                     losses[name_i] = []
                     i += 2
@@ -50,7 +50,7 @@ for i in range(len(idx_name)):
     plt.plot(losses[idx_name[i]], label=idx_name[i])
 # plt.plot(d_loss, 'ro', label='d_loss')
 # plt.plot(g_loss, 'go', label='g_loss')
-plt.legend(loc='best')
-plt.title(args.SourceDir)
+plt.legend(loc='upper right')
+# plt.title(args.SourceDir)
 plt.savefig('./loss_plot/' + args.SourceDir + '.png')
 # plt.show()
