@@ -30,6 +30,9 @@ python train_ct_3.py --dataroot ./datasets/tw_np_200 --name new_twnp200c_cyclega
 python test_ct_3.py --dataroot ./datasets/tw_np_200 --name new_twnp200c_cyclegan4cl_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --serial_batches
 python test_ct_3.py --dataroot ./datasets/tw_np_200 --name new_twnp200c_cyclegan4cl_iter50_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --serial_batches
 
+
+python train_ct_3.py --dataroot ./datasets/tw_np_200 --name new_twnp200c_cyclegan4cl2_batch2 --dataset_mode unalignedC --netG resnet_4blocks --model cycle_gan_cl2 --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 > rec/new_twnp200c_cyclegan4cl2_batch2_html_rec &
+
 # python train_ct.py --dataroot ./datasets/tw_np_200 --name twnp200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200_cyclegan_batch4_html_rec
 #####################################C_decouple
 # python train_ct.py --dataroot ./datasets/decouple_AC200 --name decouple_ac200_cyclegan_batch4 --model cycle_gan --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/decouple_ac200_cyclegan_batch4_html_rec

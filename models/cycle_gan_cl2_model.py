@@ -5,9 +5,9 @@ from .base_model import BaseModel
 from . import networks
 
 
-class CycleGANclModel(BaseModel):
+class CycleGANcl2Model(BaseModel):
     def name(self):
-        return 'CycleGANclModel'
+        return 'CycleGANcl2Model'
 
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
