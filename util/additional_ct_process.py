@@ -35,8 +35,8 @@ image_dir = "../results/miccai"
 experiment_name = "twnp200c_cyclegan4c_batch2"
 
 for image in image_names:
-    npy_path = os.path.join(npy_dir, experiment_name, "test_latest/images", )
-    image_path = os.path.join(image_dir, experiment_name, "test_latest/images", )
+    npy_path = os.path.join(npy_dir, experiment_name, "test_latest/images", image)
+    image_path = os.path.join(image_dir, experiment_name, "test_latest/images", image)
 
     [mean_str, std_str] = image_119_rec(np.load(npy_path), image_path)
     print("mean: " + ",".join(mean_str))
