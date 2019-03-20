@@ -29,14 +29,14 @@ def image_119_rec(image_numpy, image_path):
 
 image_names = ["199_fbp_atf_real_A.npy", "199_fbp_atf_fake_B_A.npy", "200_fbp_atf_real_A.npy", "200_fbp_atf_fake_B_A.npy", "201_fbp_atf_real_A.npy", "201_fbp_atf_fake_B_A.npy", "506_fbp_atf_real_A.npy", "506_fbp_atf_fake_B_A.npy"]
 
-npy_dir = "../results/twnp200c_cyclegan4c_batch2"
+npy_dir = "../results"
 image_dir = "../results/miccai"
 
 experiment_name = "twnp200c_cyclegan4c_batch2"
 
 for image in image_names:
     npy_path = os.path.join(npy_dir, experiment_name, "test_latest/images", image)
-    image_path = os.path.join(image_dir, experiment_name, "test_latest/images", image)
+    image_path = os.path.join(image_dir, experiment_name, "images", image)
 
     [mean_str, std_str] = image_119_rec(np.load(npy_path), image_path)
     print("mean: " + ",".join(mean_str))
