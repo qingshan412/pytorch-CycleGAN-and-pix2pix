@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 
 def image_119_rec(image_numpy, image_path):
     # print('A')
