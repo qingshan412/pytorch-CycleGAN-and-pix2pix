@@ -121,7 +121,7 @@ class CycleGANccModel(BaseModel):
         self.rec_A_B = self.netG_A_C(self.rec_C_fake_C_A)
         self.fake_A_B = self.netG_A_C(self.fake_C_B)
         self.rec_C_fake_C_B = self.netG_C_A(self.fake_A_B)
-        self.rec_B_A = self.netG_B_C(self.rec_C_fake_A_B)
+        self.rec_B_A = self.netG_B_C(self.rec_C_fake_C_B)
 
     def backward_D_basic(self, netD, real, fake):
         # Real
