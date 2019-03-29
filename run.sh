@@ -1,5 +1,6 @@
 #####################################complete MCCAN with local cycles of fake C
-python3 train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4cc_batch2 --dataset_mode unalignedC --model cycle_gan_cc --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200c_cyclegan4cc_batch2_html_rec &
+# python3 train_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4cc_batch2 --dataset_mode unalignedC --model cycle_gan_cc --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/twnp200c_cyclegan4cc_batch2_html_rec &
+python test_ct_3.py --dataroot ./datasets/tw_np_200 --name twnp200c_cyclegan4cc_batch2 --dataset_mode unalignedC --model cycle_gan_cc --netG resnet_4blocks --serial_batches
 
 #####################################C_test
 # python train_ct_3.py --dataroot ./datasets/tw_np_all --name twnpac_cycleganc_batch4 --dataset_mode unalignedC --model cycle_gan_c --batch_size 4 --niter 25 --niter_decay 25 --display_id -1 > rec/twnpac_cycleganc_batch4_html_rec &
