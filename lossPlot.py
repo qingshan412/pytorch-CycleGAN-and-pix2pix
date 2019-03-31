@@ -76,7 +76,7 @@ if args.Normalized:
             max_loss_value = max(losses[idx_name[i]])
 
 valid_idx = [] # idx of losses will be printed out.
-if arg.CycleLossOnly:
+if args.CycleLossOnly:
     for i in range(len(idx_name)):
         if "Cycle" in idx_name[i]:
             valid_idx.append(i)
