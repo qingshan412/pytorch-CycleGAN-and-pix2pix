@@ -13,6 +13,14 @@ parser.add_argument("-s","--SourceDir", type=str,
                     help="directory for test raw samples",
                     default = 'maps_cyclegan')
 
+parser.add_argument("-n","--Normalized", type=bool,
+                    help="Use normalized loss values",
+                    default = False)
+
+parser.add_argument("-c","--CycleLossOnly", type=bool,
+                    help="Plot cycle loss only",
+                    default = False)
+
 args = parser.parse_args()
 LogPath = path.join('./checkpoints', args.SourceDir, 'loss_log.txt')
 
@@ -61,12 +69,27 @@ while 1:
             for i in range(len(idx_name)):
                 losses[idx_name[i]].append(float(line[2*i+9]))
 
+max_loss_value = 1.
+if args.Normalized:
+    for i in range(len(idx_name)):
+        if max(losses[idx_name[i]])> max_loss_value:
+            max_loss_value = max(losses[idx_name[i]])
+
+valid_idx = [] # idx of losses will be printed out.
+if arg.CycleLossOnly:
+    for i in range(len(idx_name)):
+        if "Cycle" in idx_name[i]:
+            valid_idx.append(i)
+else:
+    for i in range(len(idx_name)):
+        valid_idx.append(i)
+
 plt.figure()
-for i in range(len(idx_name)):
-    if i > 9:
-        plt.plot(losses[idx_name[i]], '--', label=idx_name[i])
-    else:
-        plt.plot(losses[idx_name[i]], label=idx_name[i])
+for i in range(len(valid_idx)):
+        if i > 9:
+            plt.plot(np.array(losses[idx_name[valid_idx[i]]])/float(max_loss_value), '--', label=idx_name[valid_idx[i]])
+        else:
+            plt.plot(np.array(losses[idx_name[valid_idx[i]]])/float(max_loss_value), label=idx_name[valid_idx[i]])
 # plt.plot(d_loss, 'ro', label='d_loss')
 # plt.plot(g_loss, 'go', label='g_loss')
 plt.legend(ncol=2)
