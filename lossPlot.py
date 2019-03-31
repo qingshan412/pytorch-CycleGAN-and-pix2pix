@@ -13,11 +13,11 @@ parser.add_argument("-s","--SourceDir", type=str,
                     help="directory for test raw samples",
                     default = 'maps_cyclegan')
 
-parser.add_argument("-n","--Normalized", type=bool,
+parser.add_argument("-n","--Normalized", 
                     help="Use normalized loss values",
                     default=False, action='store_true')
 
-parser.add_argument("-c","--CycleLossOnly", type=bool,
+parser.add_argument("-c","--CycleLossOnly", 
                     help="Plot cycle loss only",
                     default=False, action='store_true')
 
