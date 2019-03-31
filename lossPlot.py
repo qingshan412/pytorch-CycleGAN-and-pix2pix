@@ -69,12 +69,6 @@ while 1:
             for i in range(len(idx_name)):
                 losses[idx_name[i]].append(float(line[2*i+9]))
 
-max_loss_value = 1.
-if args.Normalized:
-    for i in range(len(idx_name)):
-        if max(losses[idx_name[i]])> max_loss_value:
-            max_loss_value = max(losses[idx_name[i]])
-
 valid_idx = [] # idx of losses will be printed out.
 if args.CycleLossOnly:
     for i in range(len(idx_name)):
@@ -83,6 +77,12 @@ if args.CycleLossOnly:
 else:
     for i in range(len(idx_name)):
         valid_idx.append(i)
+
+max_loss_value = 1.
+if args.Normalized:
+    for i in range(len(valid_idx)):
+        if max(losses[idx_name[valid_idx[i]]])> max_loss_value:
+            max_loss_value = max(losses[idx_name[valid_idx[i]]])
 
 plt.figure()
 for i in range(len(valid_idx)):
