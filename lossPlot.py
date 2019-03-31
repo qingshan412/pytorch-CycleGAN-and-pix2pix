@@ -15,11 +15,11 @@ parser.add_argument("-s","--SourceDir", type=str,
 
 parser.add_argument("-n","--Normalized", type=bool,
                     help="Use normalized loss values",
-                    default = False)
+                    default=False, action='store_true')
 
 parser.add_argument("-c","--CycleLossOnly", type=bool,
                     help="Plot cycle loss only",
-                    default = False)
+                    default=False, action='store_true')
 
 args = parser.parse_args()
 LogPath = path.join('./checkpoints', args.SourceDir, 'loss_log.txt')
