@@ -50,7 +50,20 @@ def save_image(image_numpy, image_path):
     image_pil = Image.fromarray(image_numpy)
     image_pil.save(image_path)
 
-def save_ct_image(image_numpy, image_path):
+def save_ct_image(CTname, RESlabel, im_numpy, image_path):
+    if CTname.split('+')[0] != "fbp":
+        if CTname.split('_')[0] != "199" and CTname.split('_')[0] != "200":
+            mean_str, std_str = save_ct_image_naive(im_numpy, image_path)
+        else:
+            mean_str, std_str = save_ctABo_image(im_numpy, image_path)
+    else:
+        if RESlabel in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
+            mean_str, std_str = save_ctA_image(im_numpy, image_path)
+        else:
+            mean_str, std_str = save_ctB_image(im_numpy, image_path)
+    return mean_str, std_str
+
+def save_ct_image_naive(image_numpy, image_path):
     plt.clf()
     plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
     # plt.axis('off')
@@ -134,6 +147,49 @@ def save_ctB_image(image_numpy, image_path):
     std_str = [str(round(np.std(image_numpy[20:20+20, 60:60+40]),2)), str(round(np.std(image_numpy[70:70+15, 65:65+30]),2)), str(round(np.std(image_numpy[160:160+10, 225:225+25]),2))]
 
     return mean_str, std_str
+
+
+def save_merged_ct_image_8(image_numpy, image_path):
+    plt.clf()
+    plt.imshow(np.squeeze(image_numpy), cmap=plt.cm.bone)
+    currentAxisA = plt.gca()
+    if 'CT1_8_11703352_L2_HBIHI4DP_0IT0QIRM_I225_000' in image_path:
+        rectA0 = patches.Rectangle((248, 285), 20, 18, linewidth=1, edgecolor='r', facecolor='none')
+        rectA1 = patches.Rectangle((280, 160), 40, 40, linewidth=1, edgecolor='r', facecolor='none')
+        mean_str = [str(round(np.mean(image_numpy[285:285+18, 248:248+20]),2)), str(round(np.mean(image_numpy[160:160+40, 280:280+40]),2))]
+        std_str = [str(round(np.std(image_numpy[285:285+18, 248:248+20]),2)), str(round(np.std(image_numpy[160:160+40, 280:280+40]),2))]
+    if 'CT1_3_11712989_L2_5BWN3IGL_1F2AMF44_I12__000' in image_path:
+        rectA0 = patches.Rectangle((48, 265), 16, 22, linewidth=1, edgecolor='r', facecolor='none')
+        rectA1 = patches.Rectangle((110, 360), 25, 18, linewidth=1, edgecolor='r', facecolor='none')
+        mean_str = [str(round(np.mean(image_numpy[265:265+22, 48:48+16]),2)), str(round(np.mean(image_numpy[360:360+18, 110:110+25]),2))]
+        std_str = [str(round(np.std(image_numpy[265:265+22, 48:48+16]),2)), str(round(np.std(image_numpy[360:360+18, 110:110+25]),2))]
+    if 'low_dose_data_10686825_FBP_JFO5YMQT_NSHOW2LY_I6000001' in image_path:
+        rectA0 = patches.Rectangle((208, 187), 20, 20, linewidth=1, edgecolor='r', facecolor='none')
+        rectA1 = patches.Rectangle((160, 415), 20, 20, linewidth=1, edgecolor='r', facecolor='none')
+        mean_str = [str(round(np.mean(image_numpy[187:187+20, 208:208+20]),2)), str(round(np.mean(image_numpy[415:415+20, 160:160+20]),2))]
+        std_str = [str(round(np.std(image_numpy[187:187+20, 208:208+20]),2)), str(round(np.std(image_numpy[415:415+20, 160:160+20]),2))]        
+    if 'low_dose_data_1_10674581_FBP_VWBZW31O_5LSMFNNE_I2970000' in image_path:
+        rectA0 = patches.Rectangle((55, 245), 30, 25, linewidth=1, edgecolor='r', facecolor='none')
+        rectA1 = patches.Rectangle((250, 280), 30, 30, linewidth=1, edgecolor='r', facecolor='none')
+        mean_str = [str(round(np.mean(image_numpy[245:245+25, 55:55+30]),2)), str(round(np.mean(image_numpy[280:280+30, 250:250+30]),2))]
+        std_str = [str(round(np.std(image_numpy[245:245+25, 55:55+30]),2)), str(round(np.std(image_numpy[280:280+30, 250:250+30]),2))]
+    if 'low_dose_data_1_10674581_FBP_VWBZW31O_5LSMFNNE_I5500000' in image_path:
+        rectA0 = patches.Rectangle((90, 365), 30, 30, linewidth=1, edgecolor='r', facecolor='none')
+        rectA1 = patches.Rectangle((430, 260), 30, 30, linewidth=1, edgecolor='r', facecolor='none')
+        mean_str = [str(round(np.mean(image_numpy[365:365+30, 90:90+30]),2)), str(round(np.mean(image_numpy[260:260+30, 430:430+30]),2))]
+        std_str = [str(round(np.std(image_numpy[365:365+30, 90:90+30]),2)), str(round(np.std(image_numpy[260:260+30, 430:430+30]),2))]
+    
+    currentAxisA.add_patch(rectA0)
+    currentAxisA.add_patch(rectA1)
+
+    currentAxisA.axes.get_xaxis().set_visible(False)
+    currentAxisA.axes.get_yaxis().set_visible(False)
+    currentAxisA.spines['left'].set_color('none')
+    currentAxisA.spines['bottom'].set_color('none')
+    plt.savefig(image_path, bbox_inches='tight', pad_inches=0.0)
+
+    return mean_str, std_str
+
 
 def print_numpy(x, val=True, shp=False):
     x = x.astype(np.float64)

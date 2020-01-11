@@ -97,16 +97,17 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         #     im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         
         np.save(os.path.join(image_dir, '%s_%s.npy' % (name, label)), im_numpy)
-        if name.split('+')[0] != "fbp":
-            if name.split('_')[0] != "199" and name.split('_')[0] != "200":
-                mean_str, std_str = util.save_ct_image(im_numpy, save_path)
-            else:
-                mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
-        else:
-            if label in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
-                mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
-            else:
-                mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
+        mean_str, std_str = util.save_ct_image(name, label, im_numpy, save_path)
+        # if name.split('+')[0] != "fbp":
+        #     if name.split('_')[0] != "199" and name.split('_')[0] != "200":
+        #         mean_str, std_str = util.save_ct_image(im_numpy, save_path)
+        #     else:
+        #         mean_str, std_str = util.save_ctABo_image(im_numpy, save_path)
+        # else:
+        #     if label in ['real_A', 'fake_B', 'rec_A', 'idt_B', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']:
+        #         mean_str, std_str = util.save_ctA_image(im_numpy, save_path)
+        #     else:
+        #         mean_str, std_str = util.save_ctB_image(im_numpy, save_path)
         
 
         # util.save_cti_image(im_numpy, save_path, label)
@@ -114,6 +115,56 @@ def save_ct_npy(webpage, visuals, image_path, width=256):
         txts.append(label + ', mean:' + ', '.join(mean_str) + ', std:' + ', '.join(std_str))
         links.append(image_name)
     webpage.add_images(ims, txts, links, width=width)
+
+
+def save_merged_npy(webpage, NeedMerge, width=512):
+    image_dir = webpage.get_image_dir()
+    for name, attrs in NeedMerge.items():
+        if None in attrs:
+            print('Some parts missing in ' + name + '!')
+            continue
+        webpage.add_header(name)
+        ims, txts, links = [], [], []
+
+        ### Get the original pixel average
+        part_0 = np.squeeze(util.tensor2ctim(attrs[0]['real_A']))
+        part_1 = np.squeeze(util.tensor2ctim(attrs[1]['real_A']))
+        part_2 = np.squeeze(util.tensor2ctim(attrs[2]['real_A']))
+        part_3 = np.squeeze(util.tensor2ctim(attrs[3]['real_A']))
+        pixel_avg_real_A = np.mean(np.squeeze(np.concatenate((
+            np.concatenate((part_0, part_1), axis = 1), 
+            np.concatenate((part_2, part_3), axis = 1)
+            ), axis = 0)))
+
+        for label, _ in attrs[0].items():
+            # Merge images back
+            # 0,1
+            # 2,3 -merge-> merged_visual
+            part_0 = np.squeeze(util.tensor2ctim(attrs[0][label]))
+            part_1 = np.squeeze(util.tensor2ctim(attrs[1][label]))
+            part_2 = np.squeeze(util.tensor2ctim(attrs[2][label]))
+            part_3 = np.squeeze(util.tensor2ctim(attrs[3][label]))
+            im_numpy = np.squeeze(np.concatenate((
+                np.concatenate((part_0, part_1), axis = 1), 
+                np.concatenate((part_2, part_3), axis = 1)
+                ), axis = 0))
+            # adjustment according to pixel_avg_real_A
+            im_numpy = im_numpy + (pixel_avg_real_A - np.mean(im_numpy))
+            im_numpy[np.where(im_numpy > 4095)] = 4095.
+            im_numpy[np.where(im_numpy < 0)] = 0.
+            # For webpage display
+            image_name = '%s_%s.png' % (name, label)
+            save_path = os.path.join(image_dir, image_name)
+            np.save(os.path.join(image_dir, '%s_%s.npy' % (name, label)), im_numpy)
+            mean_str, std_str = util.save_merged_ct_image_8(im_numpy, save_path)            
+
+            ims.append(image_name)
+            txts.append(label + ', mean:' + ', '.join(mean_str) + 
+                ', std:' + ', '.join(std_str))
+            links.append(image_name)
+        
+        webpage.add_images(ims, txts, links, width=width)
+
 
 class Visualizer():
     def __init__(self, opt):
@@ -268,7 +319,7 @@ class Visualizer():
             for label, image in visuals.items():
                 image_numpy = util.tensor2ctim(image)
                 img_path = os.path.join(self.img_dir, 'epoch%.3d_%s.png' % (epoch, label))
-                util.save_ct_image(image_numpy, img_path)
+                util.save_ct_image_naive(image_numpy, img_path)
             # update website
             webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
             for n in range(epoch, 0, -1):

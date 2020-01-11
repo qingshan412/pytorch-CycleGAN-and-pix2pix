@@ -7,7 +7,7 @@ import random
 # import pydicom
 import numpy as np
 
-
+# Use three types of datasets: A, B, and C
 class UnalignedCDataset(BaseDataset):
     @staticmethod
     def modify_commandline_options(parser, is_train):

@@ -131,7 +131,7 @@ def __print_size_warning(ow, oh, w, h):
 def __ct_random_crop(img, target_size):
     # print(np.max(img))
     if np.max(img) > 2:
-        img = img/4095.#65535.
+        img = img/4095.#65535. -> [0, 1]
     elif np.max(img) > 1:
         # print('here...')
         img = img/2.

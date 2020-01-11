@@ -7,7 +7,7 @@ from . import networks
 
 class CycleGANcModel(BaseModel):
     def name(self):
-        return 'CycleGANcModel'
+        return 'CycleGANcModel' # complete two-cycle gan
 
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
@@ -27,9 +27,9 @@ class CycleGANcModel(BaseModel):
         # specify the training losses you want to print out. The program will call base_model.get_current_losses
         self.loss_names = ['D_A_B', 'D_A_C', 'G_A', 'cycle_A', 'idt_A', 'D_B_A', 'D_B_C', 'G_B', 'cycle_B', 'idt_B', 'D_C_A', 'D_C_B', 'G_C', 'cycle_C', 'idt_C']
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
-        visual_names_A = ['real_A', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']
-        visual_names_B = ['real_B', 'fake_A_B', 'rec_B_A', 'fake_C_B', 'rec_B_C']
-        visual_names_C = ['real_C', 'fake_A_C', 'fake_B_C', 'rec_C_A', 'rec_C_B', 'rec_C_ACB']
+        visual_names_A = ['real_A', 'fake_C_A', 'fake_B_A', 'rec_A_C', 'rec_A_B']
+        visual_names_B = ['real_B', 'fake_C_B', 'fake_A_B', 'rec_B_C', 'rec_B_A']
+        visual_names_C = ['real_C', 'fake_A_C', 'fake_B_C', 'rec_C_A', 'rec_C_B', 'rec_C_ACB'] # 'rec_C_BCA'
         if self.isTrain and self.opt.lambda_identity > 0.0:
             visual_names_A.append('idt_A')
             visual_names_B.append('idt_B')
@@ -117,7 +117,7 @@ class CycleGANcModel(BaseModel):
         # self.rec_B = self.netG_A(self.fake_A)
         
         self.fake_B_A = self.netG_B_C(self.fake_C_A)
-        self.rec_C_ACB = self.netG_C_B(self.fake_B_A)
+        self.rec_C_ACB = self.netG_C_B(self.fake_B_A) # for results check only
         self.rec_A_B = self.netG_A_C(self.rec_C_ACB)
         self.fake_A_B = self.netG_A_C(self.fake_C_B)
         self.rec_B_A = self.netG_B_C(self.netG_C_A(self.fake_A_B))

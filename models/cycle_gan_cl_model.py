@@ -28,8 +28,8 @@ class CycleGANclModel(BaseModel):
         self.loss_names = ['D_A_B', 'G_A', 'cycle_A', 'idt_A', 'D_B_A', 'G_B', 'cycle_B', 'idt_B', 'D_C_A', 'D_C_B', 'G_C', 'idt_C']
         # 'D_A_C', 'D_B_C', , 'cycle_C'
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
-        visual_names_A = ['real_A', 'fake_B_A', 'rec_A_B', 'fake_C_A']#, 'rec_A_C']
-        visual_names_B = ['real_B', 'fake_A_B', 'rec_B_A', 'fake_C_B']#, 'rec_B_C']
+        visual_names_A = ['real_A', 'fake_C_A', 'fake_B_A', 'rec_A_B']#, 'rec_A_C']
+        visual_names_B = ['real_B', 'fake_C_B', 'fake_A_B', 'rec_B_A']#, 'rec_B_C']
         visual_names_C = ['real_C', ]#'fake_A_C', 'fake_B_C', 'rec_C_A', 'rec_C_B']#
         if self.isTrain and self.opt.lambda_identity > 0.0:
             visual_names_A.append('idt_A')

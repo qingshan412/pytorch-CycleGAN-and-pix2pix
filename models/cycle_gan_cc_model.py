@@ -5,6 +5,7 @@ from .base_model import BaseModel
 from . import networks
 
 ### complete MCCAN with local cycles for fake images. e.g. Z'->Y->Z'
+### The same as cycle_gan_c, but calculate rec_C_fake_C_B without recording though.
 class CycleGANccModel(BaseModel):
     def name(self):
         return 'CycleGANccModel'
@@ -27,8 +28,8 @@ class CycleGANccModel(BaseModel):
         # specify the training losses you want to print out. The program will call base_model.get_current_losses
         self.loss_names = ['D_A_B', 'D_A_C', 'G_A', 'cycle_A', 'idt_A', 'D_B_A', 'D_B_C', 'G_B', 'cycle_B', 'idt_B', 'D_C_A', 'D_C_B', 'G_C', 'cycle_C', 'idt_C']
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
-        visual_names_A = ['real_A', 'fake_B_A', 'rec_A_B', 'fake_C_A', 'rec_A_C']
-        visual_names_B = ['real_B', 'fake_A_B', 'rec_B_A', 'fake_C_B', 'rec_B_C']
+        visual_names_A = ['real_A', 'fake_C_A', 'fake_B_A', 'rec_A_C', 'rec_A_B']
+        visual_names_B = ['real_B', 'fake_C_B', 'fake_A_B', 'rec_B_C', 'rec_B_A']
         visual_names_C = ['real_C', 'fake_A_C', 'fake_B_C', 'rec_C_A', 'rec_C_B']
         if self.isTrain and self.opt.lambda_identity > 0.0:
             visual_names_A.append('idt_A')

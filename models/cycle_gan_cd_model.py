@@ -5,9 +5,9 @@ from .base_model import BaseModel
 from . import networks
 
 
-class CycleGANcModel(BaseModel):
+class CycleGANcdModel(BaseModel):
     def name(self):
-        return 'CycleGANcModel'
+        return 'CycleGANcdModel'
 
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
@@ -95,22 +95,35 @@ class CycleGANcModel(BaseModel):
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
 
     def forward(self):
-        self.fake_C_A = self.netG_A(self.real_A)
-        self.rec_A = self.netG_C_A(self.fake_C_A)
-        self.fake_A = self.netG_C_A(self.real_C)
-        self.rec_C_A = self.netG_A(self.fake_A)
+        if self.isTrain:
+            self.fake_C_A = self.netG_A(self.real_A)
+            self.rec_A = self.netG_C_A(self.fake_C_A)
+            self.fake_A = self.netG_C_A(self.real_C)
+            self.rec_C_A = self.netG_A(self.fake_A)
 
-        # self.real_C.detach_()
+            # self.real_C.detach_()
 
-        self.fake_C_B = self.netG_B(self.real_B)
-        self.rec_B = self.netG_C_B(self.fake_C_B)
-        self.fake_B = self.netG_C_B(self.real_C)
-        self.rec_C_B = self.netG_B(self.fake_B)
-        # self.fake_B = self.netG_A(self.real_A)
-        # self.rec_A = self.netG_B(self.fake_B)
+            self.fake_C_B = self.netG_B(self.real_B)
+            self.rec_B = self.netG_C_B(self.fake_C_B)
+            self.fake_B = self.netG_C_B(self.real_C)
+            self.rec_C_B = self.netG_B(self.fake_B)
+            # self.fake_B = self.netG_A(self.real_A)
+            # self.rec_A = self.netG_B(self.fake_B)
 
-        # self.fake_A = self.netG_B(self.real_B)
-        # self.rec_B = self.netG_A(self.fake_A)
+            # self.fake_A = self.netG_B(self.real_B)
+            # self.rec_B = self.netG_A(self.fake_A)
+        else:
+            self.fake_C_A = self.netG_A(self.real_A)
+            self.rec_A = self.netG_C_A(self.fake_C_A)
+            self.fake_A = self.netG_C_A(self.real_C)
+            self.rec_C_A = self.netG_A(self.fake_A)
+
+            # self.real_C.detach_()
+
+            self.fake_C_B = self.netG_B(self.real_B)
+            self.rec_B = self.netG_C_B(self.fake_C_B)
+            self.fake_B = self.netG_C_B(self.fake_C_A)
+            self.rec_C_B = self.netG_B(self.fake_B)
 
     def backward_D_basic(self, netD, real, fake):
         # Real
