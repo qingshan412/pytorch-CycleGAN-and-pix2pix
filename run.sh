@@ -1,19 +1,41 @@
-#####################################N New data, complete multi-cycle
-python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_MC_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/june13_2_MC_batch2_html_rec &
-python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_MC_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --serial_batches --no_flip
+#!/bin/csh
 
-#####################################N New data, orignal cycle-gan
-python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_OC_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_9blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0,1 > rec/june13_2_OC_batch2_html_rec &
-python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_OC_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_9blocks --serial_batches --no_flip
+#$ -M jliu16@nd.edu      # Email address for job notification
+#$ -m abe                # Send mail when job begins, ends and aborts
+#$ -pe smp 16            # Specify parallel environment and legal core size
+#$ -q gpu
+#$ -l gpu_card=1
+#$ -N fr_aligned_basic_4          # Specify job name
 
-#####################################N New data, only local cycles
-python train_ct_3.py --dataroot ./datasets/june_13_2_lc_ac --name june13_2_LC_ac_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/june13_2_LC_ac_batch2_html_rec &
-python train_ct_3.py --dataroot ./datasets/june_13_2_lc_cb --name june13_2_LC_cb_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/june13_2_LC_cb_batch2_html_rec &
-python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_LC_batch2 --dataset_mode unalignedC --model cycle_gan_cd --netG resnet_4blocks --serial_batches --no_flip
+module load python pytorch        # Required modules
 
-#####################################N New data, only global cycles
-python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_GC_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/june13_2_GC_batch2_html_rec &
-python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_GC_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --serial_batches --no_flip
+mkdir -p /tmp/jliu16
+rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
+
+python train_fr_aligned.py --dataroot /tmp/jliu16/$JOB_ID --name fr_aligned_basic_4 \
+  --dataset_mode unaligned --model cycle_gan --netG resnet_4blocks --batch_size 2 \
+  --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/fr_aligned_basic_4_batch2_html_rec &
+
+/bin/rm -r /tmp/jliu16/$JOB_ID
+
+
+
+# #####################################N New data, complete multi-cycle
+# python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_MC_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/june13_2_MC_batch2_html_rec &
+# python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_MC_batch2 --dataset_mode unalignedC --model cycle_gan_c --netG resnet_4blocks --serial_batches --no_flip
+
+# #####################################N New data, orignal cycle-gan
+# python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_OC_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_9blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0,1 > rec/june13_2_OC_batch2_html_rec &
+# python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_OC_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_9blocks --serial_batches --no_flip
+
+# #####################################N New data, only local cycles
+# python train_ct_3.py --dataroot ./datasets/june_13_2_lc_ac --name june13_2_LC_ac_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/june13_2_LC_ac_batch2_html_rec &
+# python train_ct_3.py --dataroot ./datasets/june_13_2_lc_cb --name june13_2_LC_cb_batch2 --dataset_mode unalignedCT --model cycle_gan --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/june13_2_LC_cb_batch2_html_rec &
+# python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_LC_batch2 --dataset_mode unalignedC --model cycle_gan_cd --netG resnet_4blocks --serial_batches --no_flip
+
+# #####################################N New data, only global cycles
+# python train_ct_3.py --dataroot ./datasets/june_13_2 --name june13_2_GC_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 1 > rec/june13_2_GC_batch2_html_rec &
+# python test_ct_4.py --dataroot ./datasets/june_13_2 --name june13_2_GC_batch2 --dataset_mode unalignedC --model cycle_gan_cl --netG resnet_4blocks --serial_batches --no_flip
 
 
 #####################################N New data, original cycle-gan
