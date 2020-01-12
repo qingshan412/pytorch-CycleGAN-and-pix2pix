@@ -5,13 +5,18 @@ import ntpath
 import time
 from . import util
 from . import html
-from scipy.misc import imresize
+from PIL import Image
+# from scipy.misc import imresize
+
+numpy.array(Image.fromarray(arr).resize())
 
 if sys.version_info[0] == 2:
     VisdomExceptionBase = Exception
 else:
     VisdomExceptionBase = ConnectionError
 
+def imresize(arr, width, height):
+    return np.array(Image.fromarray(arr).resize((width, height), Image.BICUBIC))
 
 # save image to the disk
 def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
@@ -28,9 +33,11 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
         save_path = os.path.join(image_dir, image_name)
         h, w, _ = im.shape
         if aspect_ratio > 1.0:
-            im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
+            im = imresize(im, int(w * aspect_ratio), h)
+            # im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
         if aspect_ratio < 1.0:
-            im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
+            im = imresize(im, w, int(h / aspect_ratio))
+            # im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
         util.save_image(im, save_path)
 
         ims.append(image_name)
