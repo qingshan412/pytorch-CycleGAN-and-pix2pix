@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/bash
 
 #$ -M jliu16@nd.edu      # Email address for job notification
 #$ -m abe                # Send mail when job begins, ends and aborts
@@ -11,6 +11,8 @@ module load python pytorch        # Required modules
 
 mkdir -p /tmp/jliu16
 rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
+
+echo "sync success!"
 
 python train_fr_aligned.py --dataroot /tmp/jliu16/$JOB_ID --name fr_aligned_basic_4 \
   --dataset_mode unaligned --model cycle_gan --netG resnet_4blocks --batch_size 2 \
