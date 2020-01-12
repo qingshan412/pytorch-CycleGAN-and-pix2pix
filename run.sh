@@ -18,7 +18,7 @@ python train_fr_aligned.py --dataroot /tmp/jliu16/$JOB_ID --name fr_aligned_basi
   --dataset_mode unaligned --model cycle_gan --netG resnet_4blocks --batch_size 2 \
   --niter 25 --niter_decay 25 --display_id -1 --gpu_ids 0 > rec/fr_aligned_basic_4_batch2_html_rec 
 
-/bin/rm -r /tmp/jliu16/$JOB_ID
+# /bin/rm -r /tmp/jliu16/$JOB_ID
 
 
 
