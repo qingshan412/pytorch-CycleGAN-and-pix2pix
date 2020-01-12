@@ -8,8 +8,6 @@ from . import html
 from PIL import Image
 # from scipy.misc import imresize
 
-numpy.array(Image.fromarray(arr).resize())
-
 if sys.version_info[0] == 2:
     VisdomExceptionBase = Exception
 else:
