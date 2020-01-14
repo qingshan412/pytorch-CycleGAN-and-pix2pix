@@ -41,8 +41,7 @@ def get_transform(opt):
             lambda img: __scale_width(img, opt.loadSize)))
         transform_list.append(transforms.RandomCrop(opt.fineSize))
     elif opt.resize_or_crop == 'none':
-        transform_list.append(transforms.Lambda(
-            lambda img: __adjust(img)))
+        pass
     elif opt.resize_or_crop == 'ct_crop':
         transform_list.append(transforms.Lambda(
             lambda img: __ct_random_crop(img, opt.fineSize)))
@@ -68,7 +67,7 @@ def get_transform(opt):
 #                        transforms.Lambda(
 #                lambda img: __ct_normalize(img))]
     else:
-        if opt.isTrain and not opt.no_flip:
+        if opt.resize_or_crop != 'none' and opt.isTrain and not opt.no_flip:
             transform_list.append(transforms.RandomHorizontalFlip())
 
         transform_list += [transforms.ToTensor(),
