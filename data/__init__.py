@@ -43,7 +43,7 @@ def create_dataset(opt):
 
 def CreateDataLoader(opt):
     data_loader = CustomDatasetDataLoader() ### -> CustomDatasetDataLoader -> BaseDataLoader (pass)
-    data_loader.initialize(opt) ### pass opt in the base_data_loader
+    data_loader.initialize(opt) ### CustomDatasetDataLoader.initialize(opt)
     return data_loader
 
 
@@ -56,6 +56,7 @@ class CustomDatasetDataLoader(BaseDataLoader):
     def initialize(self, opt):
         BaseDataLoader.initialize(self, opt) ### self.opt=opt
         self.dataset = create_dataset(opt) ### unaligned dataset with A,B,trans info
+        print('dataset build: success!')
         self.dataloader = torch.utils.data.DataLoader(
             self.dataset,
             batch_size=opt.batch_size,
