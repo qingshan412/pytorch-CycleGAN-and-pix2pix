@@ -7,8 +7,10 @@ from util.visualizer import Visualizer
 ### landmark+bbox <-> face
 ### aligned, use UnalignedDataset class to achieve
 if __name__ == '__main__':
+    print('start...')
     ### data
     opt = TrainOptions().parse()
+    print('opt parse: success!')
     data_loader = CreateDataLoader(opt)
     print('initialize data_loader: success!')
     dataset = data_loader.load_data() ### return self 233
