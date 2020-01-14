@@ -43,7 +43,7 @@ def create_dataset(opt):
 
 def CreateDataLoader(opt):
     data_loader = CustomDatasetDataLoader() ### -> CustomDatasetDataLoader -> BaseDataLoader (pass)
-    data_loader.initialize(opt)
+    data_loader.initialize(opt) ### pass opt in the base_data_loader
     return data_loader
 
 

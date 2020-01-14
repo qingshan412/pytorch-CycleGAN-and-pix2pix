@@ -10,6 +10,7 @@ if __name__ == '__main__':
     ### data
     opt = TrainOptions().parse()
     data_loader = CreateDataLoader(opt)
+    print('initialize data_loader: success!')
     dataset = data_loader.load_data() ### return self 233
     dataset_size = len(data_loader)
     print('#training images = %d' % dataset_size)
