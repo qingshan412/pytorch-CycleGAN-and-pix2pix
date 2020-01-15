@@ -4,7 +4,7 @@
 #$ -m abe                # Send mail when job begins, ends and aborts
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
-#$ -l gpu_card=1
+#$ -l gpu_card=2
 #$ -N fr_aligned_basic_4_test          # Specify job name
 
 module load python pytorch        # Required modules
