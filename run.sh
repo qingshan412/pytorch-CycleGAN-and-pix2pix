@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=1
-#$ -N fr_aligned_basic_4_s          # Specify job name
+#$ -N fr_aligned_basic_4_test          # Specify job name
 
 module load python pytorch        # Required modules
 
@@ -13,11 +13,12 @@ module load python pytorch        # Required modules
 # rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
 
 # echo "sync success!"
+echo $CUDA_VISIBLE_DEVICES
 
-python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
-  --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
-  --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 \
-  --display_id -1 --gpu_ids 0 --serial_batches> rec/fr_aligned_basic_4_batch2_html_serial_rec 
+# python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
+#   --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
+#   --netG resnet_4blocks --batch_size 2 --niter 25 --niter_decay 25 \
+#   --display_id -1 --gpu_ids ${SGE_HGR_gpu_card// /,} --serial_batches> rec/fr_aligned_basic_4_batch2_html_serial_rec 
 
 # /bin/rm -r /tmp/jliu16/$JOB_ID
 
