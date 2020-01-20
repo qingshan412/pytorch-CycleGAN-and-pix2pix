@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N aligned_basic_4b_b4          # Specify job name
+#$ -N aligned_basic_4b_b8          # Specify job name
 
 module load python pytorch        # Required modules
 
@@ -14,11 +14,12 @@ module load python pytorch        # Required modules
 
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
+BatchSize=8
 
 python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
   --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
-  --netG resnet_4blocks --batch_size 4 --niter 25 --niter_decay 25 \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_basic_4b_b4_html_serial_rec 
+  --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
+  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_basic_4b_b${BatchSize}_html_serial_rec 
 
 # /bin/rm -r /tmp/jliu16/$JOB_ID
 
