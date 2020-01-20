@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N aligned_basic_4b_b8          # Specify job name
+#$ -N aligned_basic_4b_b6          # Specify job name
 
 module load python pytorch        # Required modules
 
