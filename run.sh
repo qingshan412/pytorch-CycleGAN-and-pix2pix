@@ -14,7 +14,7 @@ module load python pytorch        # Required modules
 
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
-BatchSize=8
+BatchSize=6
 
 python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
   --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
