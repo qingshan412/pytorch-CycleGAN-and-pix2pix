@@ -15,9 +15,10 @@ module load python pytorch        # Required modules
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
 BatchSize=6
+ModelName=pix2pix #cycle_gan
 
 python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
-  --name fr_aligned_basic_b4_b${BatchSize} --dataset_mode unaligned --model cycle_gan \
+  --name fr_aligned_basic_b4_${ModelName}_b${BatchSize} --dataset_mode unaligned --model $ModelName \
   --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_basic_4b_b${BatchSize}_html_serial_rec 
 
