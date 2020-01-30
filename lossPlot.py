@@ -108,5 +108,8 @@ plt.legend(ncol=2)
 plt.ylim(0.0, 1.1)
 plt.xlim(0, 200)
 makedirs('./loss_plot/', exist_ok=True)
-plt.savefig('./loss_plot/' + args.SourceDir + '.png')
+if args.DectectOnly:
+    plt.savefig('./loss_plot/' + args.SourceDir + '_' + args.DectectOnly.replace(',', '_') + '.png')
+else:
+    plt.savefig('./loss_plot/' + args.SourceDir + '_all.png')
 # plt.show()
