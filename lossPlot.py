@@ -62,7 +62,9 @@ while 1:
                         name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
                     elif 'pix2pix' in args.SourceDir:
                         if line[i][0].upper == 'D' or line[i][0].upper == 'G':
-                            name_i = line[i].upper                            
+                            name_i = line[i].upper()
+                        else:
+                            print(line[i])                       
                     else:
                         if line[i][0].upper == 'D' or line[i][0].upper == 'G':
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Y').replace('B', 'X').replace('C', 'Z')
