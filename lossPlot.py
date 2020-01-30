@@ -80,6 +80,7 @@ if args.CycleLossOnly:
             valid_idx.append(i)
 elif args.DectectOnly:
     valid_names = args.DectectOnly.upper().strip().split(',')
+    print(valid_names)
     for i in range(len(idx_name)):
         if idx_name[i].upper() in valid_names:
             valid_idx.append(i)
