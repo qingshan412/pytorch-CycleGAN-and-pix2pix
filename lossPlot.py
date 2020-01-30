@@ -21,6 +21,10 @@ parser.add_argument("-c","--CycleLossOnly",
                     help="Plot cycle loss only",
                     default=False, action='store_true')
 
+parser.add_argument("-d","--DectectOnly", 
+                    help="Plot some losses only, split by comma",
+                    default="", action='store_true')
+
 args = parser.parse_args()
 LogPath = path.join('./checkpoints', args.SourceDir, 'loss_log.txt')
 
@@ -73,6 +77,11 @@ valid_idx = [] # idx of losses will be printed out.
 if args.CycleLossOnly:
     for i in range(len(idx_name)):
         if "Cycle" in idx_name[i]:
+            valid_idx.append(i)
+elif args.DectectOnly:
+    valid_names = args.DectectOnly.strip().split(',')
+    for i in range(len(idx_name)):
+        if idx_name[i] in valid_names:
             valid_idx.append(i)
 else:
     for i in range(len(idx_name)):
