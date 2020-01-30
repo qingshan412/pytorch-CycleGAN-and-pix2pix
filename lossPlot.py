@@ -40,7 +40,7 @@ while 1:
         break
     for line in lines:
         line = line.strip().split(' ')
-        if len(line) > 20:
+        if len(line) > 15:
             if flag:
                 i = 8
                 while i < len(line):
