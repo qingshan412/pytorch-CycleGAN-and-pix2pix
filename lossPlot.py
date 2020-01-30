@@ -23,7 +23,7 @@ parser.add_argument("-c","--CycleLossOnly",
 
 parser.add_argument("-d","--DectectOnly", 
                     help="Plot some losses only, split by comma",
-                    default="", action='store_true')
+                    default="")
 
 args = parser.parse_args()
 LogPath = path.join('./checkpoints', args.SourceDir, 'loss_log.txt')
