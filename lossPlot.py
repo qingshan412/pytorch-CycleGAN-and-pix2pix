@@ -87,11 +87,13 @@ elif args.DectectOnly:
     valid_names = args.DectectOnly.upper().strip().split(',')
     print(valid_names)
     for i in range(len(idx_name)):
-        if idx_name[i].upper() in valid_names:
+        if idx_name[i] in valid_names:
             valid_idx.append(i)
 else:
     for i in range(len(idx_name)):
         valid_idx.append(i)
+
+print(valid_idx)
 
 max_loss_value = 1.
 if args.Normalized:
