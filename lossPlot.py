@@ -79,9 +79,9 @@ if args.CycleLossOnly:
         if "Cycle" in idx_name[i]:
             valid_idx.append(i)
 elif args.DectectOnly:
-    valid_names = args.DectectOnly.strip().split(',')
+    valid_names = args.DectectOnly.upper().strip().split(',')
     for i in range(len(idx_name)):
-        if idx_name[i] in valid_names:
+        if idx_name[i].upper() in valid_names:
             valid_idx.append(i)
 else:
     for i in range(len(idx_name)):
