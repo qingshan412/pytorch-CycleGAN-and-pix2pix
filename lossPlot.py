@@ -49,24 +49,24 @@ while 1:
                 i = 8
                 while i < len(line):
                     if 'decouple_ac200' in args.SourceDir or 'LCac' in args.SourceDir:
-                        if line[i][0].upper == 'D' or line[i][0].upper == 'G':
+                        if line[i][0].upper() == 'D' or line[i][0].upper() == 'G':
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Z').replace('B', 'X')
                         else:
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Z')
                     elif 'decouple_cb200' in args.SourceDir or 'LCcb' in args.SourceDir:
-                        if line[i][0].upper == 'D' or line[i][0].upper == 'G':
+                        if line[i][0].upper() == 'D' or line[i][0].upper() == 'G':
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Y').replace('B', 'Z')
                         else:
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Z').replace('B', 'Y')
                     elif 'cycleganc' in args.SourceDir or 'MC' in args.SourceDir:
                         name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
                     elif 'pix2pix' in args.SourceDir:
-                        if line[i][0].upper == 'D' or line[i][0].upper == 'G':
-                            name_i = line[i].upper()
+                        if line[i][0].upper() == 'D' or line[i][0].upper() == 'G':
+                            name_i = line[i][:-1].upper()
                         else:
                             print(line[i])                       
                     else:
-                        if line[i][0].upper == 'D' or line[i][0].upper == 'G':
+                        if line[i][0].upper() == 'D' or line[i][0].upper() == 'G':
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'Y').replace('B', 'X').replace('C', 'Z')
                         else:
                             name_i = line[i][0].upper() + line[i][1:-1].replace('A', 'X').replace('B', 'Y').replace('C', 'Z')
