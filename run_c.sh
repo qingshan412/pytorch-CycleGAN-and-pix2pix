@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N aligned_pix2pix_4b_b6          # Specify job name
+#$ -N aligned_pix2pix_4b_b6_con          # Specify job name
 
 module load python pytorch        # Required modules
 
@@ -18,9 +18,10 @@ BatchSize=6
 ModelName=pix2pix #cycle_gan
 
 python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
+  --continue_train \
   --name fr_aligned_basic_b4_${ModelName}_b${BatchSize} --dataset_mode unaligned --model $ModelName \
   --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_${ModelName}_4b_b${BatchSize}_html_serial_rec 
+  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_${ModelName}_4b_b${BatchSize}_html_serial_con_rec 
 
 # /bin/rm -r /tmp/jliu16/$JOB_ID
 
