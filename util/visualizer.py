@@ -179,6 +179,7 @@ class Visualizer():
         self.name = opt.name
         self.opt = opt
         self.saved = False
+        self.epochs = [] # epoch to save and display
         if self.display_id > 0:
             import visdom
             self.ncols = opt.display_ncols
@@ -258,7 +259,9 @@ class Visualizer():
                 util.save_image(image_numpy, img_path)
             # update website
             webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
-            for n in range(epoch, 0, -1):
+            self.epochs.append(epoch)
+            for i in range(len(epoch), 0, -1):
+                n = self.epochs[i-1]
                 webpage.add_header('epoch [%d]' % n)
                 ims, txts, links = [], [], []
 
