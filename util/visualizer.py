@@ -260,7 +260,7 @@ class Visualizer():
             # update website
             webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
             self.epochs.append(epoch)
-            for i in range(len(epoch), 0, -1):
+            for i in range(len(self.epochs), 0, -1):
                 n = self.epochs[i-1]
                 webpage.add_header('epoch [%d]' % n)
                 ims, txts, links = [], [], []
