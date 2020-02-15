@@ -111,7 +111,9 @@ class BaseOptions():
             id = int(str_id)
             if id >= 0:
                 opt.gpu_ids.append(id)
-        opt.gpu_ids[0] = 0 # the first gpu is treated as 0 regardless the assignment on CRC
+        # the first gpu is treated as 0 regardless the assignment on CRC
+        opt.gpu_ids.sort()
+        opt.gpu_ids[0] = 0 
         if len(opt.gpu_ids) > 0:
             torch.cuda.set_device(opt.gpu_ids[0]) ### default GPU
 
