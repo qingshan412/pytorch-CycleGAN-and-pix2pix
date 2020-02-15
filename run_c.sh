@@ -21,7 +21,7 @@ python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
   --continue_train \
   --name fr_aligned_basic_b4_${ModelName}_b${BatchSize} --dataset_mode unaligned --model $ModelName \
-  --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
+  --netG resnet_4blocks --batch_size $BatchSize --niter 100 --niter_decay 100 \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_${ModelName}_4b_b${BatchSize}_html_serial_con_rec 
 
 # /bin/rm -r /tmp/jliu16/$JOB_ID
