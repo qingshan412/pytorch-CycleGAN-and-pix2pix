@@ -15,8 +15,9 @@ class ImagePool():
             return images
         return_images = []
         for image in images:
-            image = torch.unsqueeze(image.data, 0)
+            image = torch.unsqueeze(image.data, 0) #(3,224,112) -> (1,3,224,112)
             if self.num_imgs < self.pool_size:
+                # return the input image with one extra dimension directly
                 self.num_imgs = self.num_imgs + 1
                 self.images.append(image)
                 return_images.append(image)
@@ -24,6 +25,7 @@ class ImagePool():
                 p = random.uniform(0, 1)
                 if p > 0.5:
                     random_id = random.randint(0, self.pool_size - 1)  # randint is inclusive
+                    print(random_id)
                     tmp = self.images[random_id].clone()
                     self.images[random_id] = image
                     return_images.append(tmp)
