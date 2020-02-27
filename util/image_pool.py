@@ -10,6 +10,7 @@ class ImagePool():
             self.images = []
 
     def query(self, images):
+        # 1-to-1 mapping, no random
         if self.pool_size == 0:
             return images
         return_images = []
