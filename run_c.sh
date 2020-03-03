@@ -7,7 +7,7 @@
 #$ -l gpu_card=2
 #$ -N adult_basic          # Specify job name
 
-module load python pytorch        # Required modules
+module load pytorch        # Required modules
 
 # mkdir -p /tmp/jliu16
 # rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
