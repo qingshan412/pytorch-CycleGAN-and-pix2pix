@@ -25,7 +25,7 @@ class ImagePool():
                 p = random.uniform(0, 1)
                 if p > 0.5:
                     random_id = random.randint(0, self.pool_size - 1)  # randint is inclusive
-                    print(random_id)
+                    print('using random_id:', random_id)
                     tmp = self.images[random_id].clone()
                     self.images[random_id] = image
                     return_images.append(tmp)
