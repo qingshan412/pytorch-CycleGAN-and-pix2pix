@@ -5,21 +5,33 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N aligned_basic_4b_b6          # Specify job name
+#$ -N torch_test          # Specify job name
 
 module load python pytorch        # Required modules
 
-# mkdir -p /tmp/jliu16
-# rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
-
-# echo "sync success!"
-# echo $CUDA_VISIBLE_DEVICES
 BatchSize=6
+ModelName=pix2pix #cycle_gan
+#################### test train 
+python train_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
+  --continue_train \
+  --name fr_aligned_basic_b4_${ModelName}_b${BatchSize} --dataset_mode unaligned --model $ModelName \
+  --netG resnet_4blocks --batch_size $BatchSize \
+  --niter 1 --niter_decay 1 --pool_size 5\
+  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_train_test_rec_2 
 
-python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
-  --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
-  --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_basic_4b_b${BatchSize}_html_serial_rec 
+
+# # mkdir -p /tmp/jliu16
+# # rsync -a ~/Private/Research/2020/FR/InsightFace_Pytorch/data/facebank/webface /tmp/jliu16/$JOB_ID
+
+# # echo "sync success!"
+# # echo $CUDA_VISIBLE_DEVICES
+# BatchSize=6
+
+# python train_fr_aligned.py --dataroot ../InsightFace_Pytorch/data/facebank/webface \
+#   --name fr_aligned_basic_4 --dataset_mode unaligned --model cycle_gan \
+#   --netG resnet_4blocks --batch_size $BatchSize --niter 25 --niter_decay 25 \
+#   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_aligned_basic_4b_b${BatchSize}_html_serial_rec 
 
 # /bin/rm -r /tmp/jliu16/$JOB_ID
 
