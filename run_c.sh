@@ -32,6 +32,7 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
+  --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/fr_aligned_${ModelName}_4b_html_test_rec_raw 
 #################### train on adults faces and then children faces
 # python train_fr_aligned.py \
