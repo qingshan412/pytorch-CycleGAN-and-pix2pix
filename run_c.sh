@@ -15,7 +15,7 @@ module load python pytorch        # Required modules
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
 BatchSize=6
-ModelName=pix2pix #cycle_gan
+ModelName=pix2pix_transfer #pix2pix #cycle_gan
 
 #################### test train 
 # python train_fr_aligned.py \
@@ -28,12 +28,12 @@ ModelName=pix2pix #cycle_gan
 #################### test on changed landmarks
 python test_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
-  --name fr_aligned_basic_b4_${ModelName}_b${BatchSize} \
+  --name fr_adult_${ModelName}_b${BatchSize} \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
   --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/fr_aligned_${ModelName}_4b_html_test_rec_raw 
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/test 
 #################### train on adults faces and then children faces
 # python train_fr_aligned.py \
 #   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
