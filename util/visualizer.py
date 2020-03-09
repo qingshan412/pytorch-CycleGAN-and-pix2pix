@@ -259,7 +259,11 @@ class Visualizer():
                 util.save_image(image_numpy, img_path)
             # update website
             webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
-            self.epochs.append(epoch)
+            if not self.epoch:
+                self.epochs.append(epoch)
+            else:
+                if self.epochs[-1] != epoch:
+                    self.epochs.append(epoch)
             for i in range(len(self.epochs), 0, -1):
                 n = self.epochs[i-1]
                 webpage.add_header('epoch [%d]' % n)
