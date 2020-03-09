@@ -17,8 +17,9 @@ if __name__ == '__main__':
     dataset = data_loader.load_data()
     model = create_model(opt)
     model.setup(opt)
-    print()
-    print()
+    print(model.netG)
+    for name, param in model.netG.named_parameters():
+        print(name, param)
     exit(0)
     # create website
     web_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.epoch)) ### ./results/maps_cyclegan/test_[epoch]
