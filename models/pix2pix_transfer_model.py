@@ -7,7 +7,7 @@ def filtered_params(network, key_layer=set([18,21])):
     f_p = []
     for name, param in network.named_parameters():
         if int(name.strip().split('.')[2]) in key_layer:
-            f_p.aapend(param)
+            f_p.append(param)
     return f_p
 
 class Pix2PixTransferModel(BaseModel):
