@@ -17,6 +17,15 @@ module load python pytorch        # Required modules
 BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
 
+#################### train on adults faces and then children faces
+python train_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
+  --continue_train \
+  --name fr_adult_${ModelName}_b${BatchSize} \
+  --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+  --batch_size $BatchSize --niter 25 --niter_decay 25 \
+  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+  --serial_batches > rec/fr_adult_${ModelName}_b${BatchSize}_2layer_rec 
 #################### test train 
 # python train_fr_aligned.py \
 #   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
@@ -25,15 +34,15 @@ ModelName=pix2pix_transfer #pix2pix #cycle_gan
 #   --netG resnet_4blocks --batch_size $BatchSize \
 #   --niter 1 --niter_decay 1 --pool_size 5\
 #   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES --serial_batches > rec/fr_train_test_rec 
-#################### test on changed landmarks
-python test_fr_aligned.py \
-  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
-  --name fr_adult_${ModelName}_b${BatchSize} \
-  --dataset_mode unaligned \
-  --model $ModelName \
-  --netG resnet_4blocks \
-  --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/test 
+#################### test
+# python test_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
+#   --name fr_adult_${ModelName}_b${BatchSize} \
+#   --dataset_mode unaligned \
+#   --model $ModelName \
+#   --netG resnet_4blocks \
+#   --num_test 100 \
+#   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/test 
 #################### train on adults faces and then children faces
 # python train_fr_aligned.py \
 #   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
