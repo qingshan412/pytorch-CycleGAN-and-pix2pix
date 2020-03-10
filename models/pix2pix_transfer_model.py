@@ -3,6 +3,12 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
+def filtered_params(network, key_layer=set([18,21])):
+    f_p = {}
+    for name, param in network.named_parameters():
+        if int(name.strip().split('.')[2]) in key_layer:
+            f_p[name] = param
+    return f_p
 
 class Pix2PixTransferModel(BaseModel):
     def name(self):
@@ -50,12 +56,15 @@ class Pix2PixTransferModel(BaseModel):
 
             # initialize optimizers
             self.optimizers = []
-            self.optimizer_G = torch.optim.Adam(self.netG.parameters(),
+
+            self.optimizer_G = torch.optim.Adam(filtered_params(self.netG),
                                                 lr=opt.lr, betas=(opt.beta1, 0.999))
-            self.optimizer_D = torch.optim.Adam(self.netD.parameters(),
-                                                lr=opt.lr, betas=(opt.beta1, 0.999))
+            # self.optimizer_G = torch.optim.Adam(self.netG.parameters(),
+            #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
+            # self.optimizer_D = torch.optim.Adam(self.netD.parameters(),
+            #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
             self.optimizers.append(self.optimizer_G)
-            self.optimizers.append(self.optimizer_D)
+            # self.optimizers.append(self.optimizer_D)
 
     def set_input(self, input):
         AtoB = self.opt.direction == 'AtoB'
