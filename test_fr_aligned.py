@@ -4,8 +4,6 @@ from data import CreateDataLoader
 from models import create_model
 from util.visualizer import save_images
 from util import html
-from models.pix2pix_transfer_model import filtered_params
-
 
 if __name__ == '__main__':
     opt = TestOptions().parse()
@@ -18,7 +16,10 @@ if __name__ == '__main__':
     dataset = data_loader.load_data()
     model = create_model(opt)
     model.setup(opt)
-    print(filtered_params(model.netG))
+    print('_parameters:')
+    print(model.netG._parameters)
+    print('items:')
+    print(model.netG._parameters.items())
     exit(0)
     # create website
     web_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.epoch)) ### ./results/maps_cyclegan/test_[epoch]
