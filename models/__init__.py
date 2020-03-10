@@ -16,6 +16,7 @@ def find_model_using_name(model_name):
     target_model_name = model_name.replace('_', '') + 'model'
     print('target_model:', target_model_name)
     for name, cls in modellib.__dict__.items():
+        print('candidate:', name.lower())
         if name.lower() == target_model_name.lower() \
            and issubclass(cls, BaseModel):
             model = cls
