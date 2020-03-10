@@ -7,7 +7,6 @@ def find_model_using_name(model_name):
     # the file "models/modelname_model.py"
     # will be imported.
     model_filename = "models." + model_name + "_model"
-    print('import:', model_filename)
     modellib = importlib.import_module(model_filename)
 
     # In the file, the class called ModelNameModel() will
@@ -17,7 +16,6 @@ def find_model_using_name(model_name):
     target_model_name = model_name.replace('_', '') + 'model'
     print('target_model:', target_model_name)
     for name, cls in modellib.__dict__.items():
-        print('candidate:', name.lower())
         if name.lower() == target_model_name.lower() \
            and issubclass(cls, BaseModel):
             model = cls
