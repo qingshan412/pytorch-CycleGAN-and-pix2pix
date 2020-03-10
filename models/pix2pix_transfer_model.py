@@ -107,11 +107,11 @@ class Pix2PixTransferModel(BaseModel):
 
     def optimize_parameters(self):
         self.forward()
-        # update D
-        self.set_requires_grad(self.netD, True)
-        self.optimizer_D.zero_grad()
-        self.backward_D()
-        self.optimizer_D.step()
+        # # update D
+        # self.set_requires_grad(self.netD, True)
+        # self.optimizer_D.zero_grad()
+        # self.backward_D()
+        # self.optimizer_D.step()
 
         # update G
         self.set_requires_grad(self.netD, False)
