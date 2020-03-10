@@ -3,7 +3,7 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
-def filtered_params(network, key_layer=set([18,21])):
+def filtered_params(network, key_layer=set([21])):
     f_p = []
     for name, param in network.named_parameters():
         if int(name.strip().split('.')[2]) in key_layer:
