@@ -17,6 +17,7 @@ if __name__ == '__main__':
     dataset = data_loader.load_data()
     model = create_model(opt)
     model.setup(opt)
+    print(model.netG.named_parameters())
     for name, param in model.netG.named_parameters():
         print(name)
     exit(0)
