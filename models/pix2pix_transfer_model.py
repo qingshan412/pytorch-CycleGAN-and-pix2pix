@@ -4,10 +4,10 @@ from .base_model import BaseModel
 from . import networks
 
 def filtered_params(network, key_layer=set([18,21])):
-    f_p = {}
+    f_p = []
     for name, param in network.named_parameters():
         if int(name.strip().split('.')[2]) in key_layer:
-            f_p[name] = param
+            f_p.aapend(param)
     return f_p
 
 class Pix2PixTransferModel(BaseModel):
