@@ -21,7 +21,7 @@ if __name__ == '__main__':
         print(name)
     print('**********************************************************')
     print('discriminator:')
-    for name, param in model.netG.named_parameters():
+    for name, param in model.netD.named_parameters():
         print(name)
     exit(0)
     # create website
