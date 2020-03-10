@@ -4,7 +4,7 @@ from .base_model import BaseModel
 from . import networks
 
 
-class Pix2PixModel(BaseModel):
+class Pix2PixTransferModel(BaseModel):
     def name(self):
         return 'Pix2PixTransferModel'
 
