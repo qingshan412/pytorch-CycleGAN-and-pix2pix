@@ -10,7 +10,9 @@
 module load python pytorch        # Required modules
 
 BatchSize=6
-ModelName=pix2pix #cycle_gan
+ModelName=pix2pix_transfer #pix2pix #cycle_gan
+Epoch=2000 #25, 100, 500, 2000
+FolderName=fr_adult_${ModelName}_b${BatchSize}_${Epoch}_1layer_pool5
 
 #################### test
 python test_fr_aligned.py \
@@ -19,6 +21,7 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
+  --epoch 15\
   --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/Dtest 
 #################### test train 
