@@ -16,7 +16,7 @@ module load python pytorch        # Required modules
 # echo $CUDA_VISIBLE_DEVICES
 BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
-Epoch=100 #25, 100, 500, 2000
+Epoch=500 #25, 100, 500, 2000
 
 #################### train on adults faces and then children faces
 python train_fr_aligned.py \
