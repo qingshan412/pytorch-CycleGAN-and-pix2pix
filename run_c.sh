@@ -18,6 +18,7 @@ BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
 Epoch=500 #25, 100, 500, 2000
 
+cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/fr_adult_${ModelName}_b${BatchSize}_${Epoch}_1layer
 #################### train on adults faces and then children faces
 python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
