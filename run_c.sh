@@ -25,7 +25,7 @@ python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
   --continue_train \
   --pool_size 5\
-  --name $FolderName \
+  --name ${FolderName} \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Epoch --niter_decay $Epoch \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
