@@ -3,13 +3,13 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
-def filtered_params(network, key_layer=set([21])):
+def filtered_params(network, gpu_ids, key_layer=set([21])):
     f_p = []
+    num_key = 2 if gpu_ids else 1
     for name, param in network.named_parameters():
-        print(name, ':', name.strip().split('.')[2])
-        # if int(name.strip().split('.')[2]) in key_layer:
-        #     f_p.append(param)
-    exit(0)
+        if int(name.strip().split('.')[num_key]) in key_layer:
+            f_p.append(param)
+    # exit(0)
     return f_p
 
 class Pix2PixTransferModel(BaseModel):
@@ -59,7 +59,7 @@ class Pix2PixTransferModel(BaseModel):
             # initialize optimizers
             self.optimizers = []
 
-            self.optimizer_G = torch.optim.Adam(filtered_params(self.netG),
+            self.optimizer_G = torch.optim.Adam(filtered_params(self.netG, self.gpu_ids),
                                                 lr=opt.lr, betas=(opt.beta1, 0.999))
             # self.optimizer_G = torch.optim.Adam(self.netG.parameters(),
             #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
