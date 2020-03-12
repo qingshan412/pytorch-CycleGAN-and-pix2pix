@@ -14,5 +14,5 @@ python train_fr_aligned.py \
   --name ${FolderName} \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
-  --display_id -1 --gpu_ids 1,2 \
+  --display_id -1 --gpu_ids 0,1 \
   --serial_batches > rec/${FolderName}_fe_rec
