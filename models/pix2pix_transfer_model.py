@@ -33,7 +33,8 @@ class Pix2PixTransferModel(BaseModel):
         BaseModel.initialize(self, opt)
         self.isTrain = opt.isTrain
         # specify the training losses you want to print out. The program will call base_model.get_current_losses
-        self.loss_names = ['G_GAN', 'G_L1'] #, 'D_real', 'D_fake']
+        self.loss_names = ['G_GAN', 'G_L1', 'D_real', 'D_fake']
+        # self.loss_names = ['G_GAN', 'G_L1'] #, 'D_real', 'D_fake']
         # specify the images you want to save/display. The program will call base_model.get_current_visuals
         self.visual_names = ['real_A', 'fake_B', 'real_B']
         # specify the models you want to save to the disk. The program will call base_model.save_networks and base_model.load_networks
@@ -61,12 +62,14 @@ class Pix2PixTransferModel(BaseModel):
 
             self.optimizer_G = torch.optim.Adam(filtered_params(self.netG, self.gpu_ids),
                                                 lr=opt.lr, betas=(opt.beta1, 0.999))
+            self.optimizer_D = torch.optim.Adam(filtered_params(self.netD, self.gpu_ids),
+                                                lr=opt.lr, betas=(opt.beta1, 0.999))
             # self.optimizer_G = torch.optim.Adam(self.netG.parameters(),
             #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
             # self.optimizer_D = torch.optim.Adam(self.netD.parameters(),
             #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
             self.optimizers.append(self.optimizer_G)
-            # self.optimizers.append(self.optimizer_D)
+            self.optimizers.append(self.optimizer_D)
 
     def set_input(self, input):
         AtoB = self.opt.direction == 'AtoB'
@@ -109,11 +112,11 @@ class Pix2PixTransferModel(BaseModel):
 
     def optimize_parameters(self):
         self.forward()
-        # # update D
-        # self.set_requires_grad(self.netD, True)
-        # self.optimizer_D.zero_grad()
-        # self.backward_D()
-        # self.optimizer_D.step()
+        # update D
+        self.set_requires_grad(self.netD, True)
+        self.optimizer_D.zero_grad()
+        self.backward_D()
+        self.optimizer_D.step()
 
         # update G
         self.set_requires_grad(self.netD, False)
