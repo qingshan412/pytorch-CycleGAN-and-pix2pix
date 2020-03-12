@@ -7,6 +7,7 @@ def filtered_params(network, gpu_ids, key_layer=set([21])):
     f_p = []
     num_key = 2 if gpu_ids else 1
     for name, param in network.named_parameters():
+        print(name)
         if int(name.strip().split('.')[num_key]) in key_layer:
             f_p.append(param)
     print('filtered: ', len(f_p))
