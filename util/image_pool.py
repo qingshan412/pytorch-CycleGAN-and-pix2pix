@@ -4,16 +4,13 @@ import torch
 
 class ImagePool():
     def __init__(self, pool_size):
-        print('Entering ImagePool...')
         self.pool_size = pool_size
         if self.pool_size > 0:
             self.num_imgs = 0
             self.images = []
-        print('pool size:', self.pool_size)
 
     def query(self, images):
         # 1-to-1 mapping, no random
-        print('Entering query...')
         if self.pool_size == 0:
             return images
         return_images = []
