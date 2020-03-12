@@ -9,7 +9,7 @@ def filtered_params(network, gpu_ids, key_layer=set([21])):
     for name, param in network.named_parameters():
         if int(name.strip().split('.')[num_key]) in key_layer:
             f_p.append(param)
-    # exit(0)
+    print('filtered: ', len(f_p))
     return f_p
 
 class Pix2PixTransferModel(BaseModel):
