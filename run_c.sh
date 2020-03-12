@@ -30,7 +30,7 @@ python train_fr_aligned.py \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Epoch --niter_decay $Epoch \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
-  --serial_batches > rec/${FolderName}_DG_rec 
+  --serial_batches > rec/${FolderName}_rec 
 #################### test train 
 # python train_fr_aligned.py \
 #   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
