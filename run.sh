@@ -14,32 +14,67 @@ module load python pytorch        # Required modules
 
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
-BatchSize=6
+
+# BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
-Epoch=100 #25, 100, 500, 2000
-FolderName=fr_adult_${ModelName}_b${BatchSize}_${Epoch}_1layer_pool5_DG_rr
-
-
+# Epoch=100 #25, 100, 500, 2000
+# FolderName=fr_adult_${ModelName}_b${BatchSize}_${Epoch}_1layer_pool5_DG_rr
 #################### train on adults faces and then children faces
-[ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
-cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
-python train_fr_aligned.py \
-  --dataroot ../InsightFace_Pytorch/data/facebank/resize+raw \
-  --continue_train \
-  --pool_size 5\
-  --name ${FolderName} \
-  --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
-  --batch_size $BatchSize --niter $Epoch --niter_decay $Epoch \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
-  --serial_batches > rec/${FolderName}_rec 
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# python train_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/resize+raw \
+#   --continue_train \
+#   --pool_size 5\
+#   --name ${FolderName} \
+#   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+#   --batch_size $BatchSize --niter $Epoch --niter_decay $Epoch \
+#   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+#   --serial_batches > rec/${FolderName}_rec 
 
 #################### test
+FolderName=fr_adult_pix2pix_transfer_b6_25_2layer
+python test_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+  --name $FolderName \
+  --dataset_mode unaligned \
+  --model $ModelName \
+  --netG resnet_4blocks \
+  --epoch 10\
+  --num_test 100 \
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+
+FolderName=fr_adult_pix2pix_transfer_b6_25_1layer_fe
+python test_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+  --name $FolderName \
+  --dataset_mode unaligned \
+  --model $ModelName \
+  --netG resnet_4blocks \
+  --epoch 10\
+  --num_test 100 \
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+
+FolderName=fr_adult_pix2pix_transfer_b6_25_1layer_pool5_DG
+python test_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+  --name $FolderName \
+  --dataset_mode unaligned \
+  --model $ModelName \
+  --netG resnet_4blocks \
+  --epoch 10\
+  --num_test 100 \
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test
+
+
+# #################### test
+# FolderName=fr_adult_pix2pix_transfer_b6_25_2layer
 # python test_fr_aligned.py \
 #   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
-#   --name fr_adult_${ModelName}_b${BatchSize} \
+#   --name $FolderName \
 #   --dataset_mode unaligned \
 #   --model $ModelName \
 #   --netG resnet_4blocks \
-#   --epoch 15\
+#   --epoch 10\
 #   --num_test 100 \
 #   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/Dtest 
