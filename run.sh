@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N resize_test          # Specify job name
+#$ -N raw_resize          # Specify job name
 
 module load python pytorch        # Required modules
 
