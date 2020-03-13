@@ -5,7 +5,7 @@
 #$ -pe smp 16            # Specify parallel environment and legal core size
 #$ -q gpu
 #$ -l gpu_card=2
-#$ -N mixed          # Specify job name
+#$ -N raw_test          # Specify job name
 
 module load python pytorch        # Required modules
 
