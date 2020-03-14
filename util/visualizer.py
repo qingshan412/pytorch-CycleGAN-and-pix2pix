@@ -250,7 +250,8 @@ class Visualizer():
                     self.vis.image(image_numpy.transpose([2, 0, 1]), opts=dict(title=label),
                                    win=self.display_id + idx)
                     idx += 1
-
+        print('save_result:', save_result)
+        print('self.saved:', self.saved)
         if self.use_html and (save_result or not self.saved):  # save images to a html file
             self.saved = True
             for label, image in visuals.items():
