@@ -17,7 +17,7 @@ module load python pytorch        # Required modules
 BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
 Iter=100 #25, 100, 500, 2000
-FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool50_DG_raw
+# FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool50_DG_raw
 
 #################### train on adults faces and then children faces
 # [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
@@ -36,8 +36,8 @@ FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool50_DG_raw
 
 FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool5_DG_rr
 #################### train on adults faces and then children faces
-[ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
-cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
 python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/resize+raw \
   --continue_train \
