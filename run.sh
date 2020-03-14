@@ -17,8 +17,9 @@ module load python pytorch        # Required modules
 
 # BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
-# Epoch=100 #25, 100, 500, 2000
-# FolderName=fr_adult_${ModelName}_b${BatchSize}_${Epoch}_1layer_pool5_DG_rr
+Epoch=15
+# Iter=100 #25, 100, 500, 2000
+# FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool5_DG_rr
 #################### train on adults faces and then children faces
 # [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
 # cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
@@ -28,7 +29,7 @@ ModelName=pix2pix_transfer #pix2pix #cycle_gan
 #   --pool_size 5\
 #   --name ${FolderName} \
 #   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
-#   --batch_size $BatchSize --niter $Epoch --niter_decay $Epoch \
+#   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
 #   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
 #   --serial_batches > rec/${FolderName}_rec 
 
@@ -40,7 +41,7 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch 10\
+  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
 
@@ -51,7 +52,7 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch 10\
+  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
 
@@ -62,7 +63,7 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch 10\
+  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test
 
