@@ -44,12 +44,6 @@ if __name__ == '__main__':
 
             if total_steps % opt.display_freq == 0:
                 save_result = total_steps % opt.update_html_freq == 0
-                print('total_steps:', total_steps)
-                print('opt.update_html_freq:', opt.update_html_freq)
-                print('opt.display_freq:', opt.display_freq)
-                print('save_result:', save_result)
-                if save_result:
-                    print(data['A_paths'])
                 visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
 
             if total_steps % opt.print_freq == 0:
