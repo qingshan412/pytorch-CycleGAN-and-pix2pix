@@ -4,8 +4,8 @@ from data import CreateDataLoader
 from models import create_model
 from util.visualizer import Visualizer
 
-import random
-random.seed(666)
+# import random
+# random.seed(666)
 
 ### landmark+bbox <-> face
 ### aligned, use UnalignedDataset class to achieve
