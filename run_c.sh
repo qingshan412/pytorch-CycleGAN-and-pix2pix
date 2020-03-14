@@ -41,7 +41,6 @@ cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
 python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/resize+raw \
   --continue_train \
-  --pool_size 5\
   --name ${FolderName} \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
