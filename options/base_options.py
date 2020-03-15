@@ -14,7 +14,7 @@ class BaseOptions():
         parser.add_argument('--dataroot', required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
         parser.add_argument('--batch_size', type=int, default=1, help='input batch size')
         parser.add_argument('--loadSize', type=int, default=286, help='scale images to this size') ### [286]
-        parser.add_argument('--fineSize', type=int, default=256, help='then crop to this size')
+        parser.add_argument('--fineSize', type=int, default=112, help='then crop to this size') ###[256]
         parser.add_argument('--display_winsize', type=int, default=256, help='display window size') ### J.L.
         # Use 1 for CT images, and use 3 for the face recognition proj.
         parser.add_argument('--input_nc', type=int, default=3, help='# of input image channels')
