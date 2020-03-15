@@ -31,12 +31,13 @@ Iter=100 #25, 100, 500, 2000
 #   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
 #   --serial_batches > rec/${FolderName}_rec 
 
-FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool5_DG_rr
+FolderName=fr_aug_${ModelName}_b${BatchSize}_${Iter}_2layer
 #################### train on adults faces and then children faces
-# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
-# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+[ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
 python train_fr_aligned.py \
-  --dataroot ../InsightFace_Pytorch/data/facebank/resize+raw \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
+  --resize_or_crop crop \
   --continue_train \
   --name ${FolderName} \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
