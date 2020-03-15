@@ -41,7 +41,6 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids 0,1 > rec/${FolderName}_test 
 
@@ -52,7 +51,6 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids 0,1 > rec/${FolderName}_test 
 
@@ -63,7 +61,6 @@ python test_fr_aligned.py \
   --dataset_mode unaligned \
   --model $ModelName \
   --netG resnet_4blocks \
-  --epoch $Epoch\
   --num_test 100 \
   --gpu_ids 0,1 > rec/${FolderName}_test
 
