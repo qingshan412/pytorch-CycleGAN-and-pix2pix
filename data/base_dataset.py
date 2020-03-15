@@ -68,7 +68,7 @@ def get_transform(opt):
     #                        transforms.Lambda(
     #             lambda img: __ct_normalize(img))]
     else:
-        if opt.resize_or_crop != 'none' and opt.opt.isTrain and not opt.no_flip:
+        if opt.resize_or_crop != 'none' and opt.isTrain and not opt.no_flip:
             transform_list.append(transforms.RandomHorizontalFlip())
 
         transform_list += [transforms.ToTensor(),
