@@ -42,7 +42,7 @@ python train_fr_aligned.py \
   --name ${FolderName} \
   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+  --display_id -1 --gpu_ids 1,2 \
   --serial_batches > rec/${FolderName}_rec 
   
 #################### test train 
