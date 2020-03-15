@@ -3,7 +3,7 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
-def filtered_params_G(network, gpu_ids, key_layer=set([21])):
+def filtered_params(network, gpu_ids, key_layer=set([18,21])):
     f_p = []
     num_key = 2 if gpu_ids else 1
     for name, param in network.named_parameters():
@@ -11,13 +11,13 @@ def filtered_params_G(network, gpu_ids, key_layer=set([21])):
             f_p.append(param)
     return f_p
 
-def filtered_params_D(network, gpu_ids, key_layer=set([11])):
-    f_p = []
-    num_key = 2 if gpu_ids else 1
-    for name, param in network.named_parameters():
-        if int(name.strip().split('.')[num_key]) in key_layer:
-            f_p.append(param)
-    return f_p
+# def filtered_params_D(network, gpu_ids, key_layer=set([11])):
+#     f_p = []
+#     num_key = 2 if gpu_ids else 1
+#     for name, param in network.named_parameters():
+#         if int(name.strip().split('.')[num_key]) in key_layer:
+#             f_p.append(param)
+#     return f_p
 
 class Pix2PixTransferModel(BaseModel):
     def name(self):
