@@ -40,10 +40,24 @@ python train_fr_aligned.py \
   --resize_or_crop crop \
   --continue_train \
   --name ${FolderName} \
-  --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+  --dataset_mode aligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
   --display_id -1 --gpu_ids 1,2 \
   --serial_batches > rec/${FolderName}_rec 
+  
+# FolderName=fr_aug_${ModelName}_b${BatchSize}_${Iter}_2layer
+# #################### train on adults faces and then children faces
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# python train_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
+#   --resize_or_crop crop \
+#   --continue_train \
+#   --name ${FolderName} \
+#   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+#   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
+#   --display_id -1 --gpu_ids 1,2 \
+#   --serial_batches > rec/${FolderName}_rec 
   
 #################### test train 
 # python train_fr_aligned.py \
