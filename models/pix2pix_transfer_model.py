@@ -67,7 +67,7 @@ class Pix2PixTransferModel(BaseModel):
             # initialize optimizers
             self.optimizers = []
 
-            self.optimizer_G = torch.optim.Adam(filtered_params_G(self.netG, self.gpu_ids),
+            self.optimizer_G = torch.optim.Adam(filtered_params(self.netG, self.gpu_ids),
                                                 lr=opt.lr, betas=(opt.beta1, 0.999))
             # self.optimizer_D = torch.optim.Adam(filtered_params_D(self.netD, self.gpu_ids),
             #                                     lr=opt.lr, betas=(opt.beta1, 0.999))
