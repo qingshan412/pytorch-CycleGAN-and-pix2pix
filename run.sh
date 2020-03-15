@@ -43,7 +43,7 @@ python test_fr_aligned.py \
   --netG resnet_4blocks \
   --epoch $Epoch\
   --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+  --gpu_ids 0,1 > rec/${FolderName}_test 
 
 FolderName=fr_adult_pix2pix_transfer_b6_25_1layer_fe
 python test_fr_aligned.py \
@@ -54,7 +54,7 @@ python test_fr_aligned.py \
   --netG resnet_4blocks \
   --epoch $Epoch\
   --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+  --gpu_ids 0,1 > rec/${FolderName}_test 
 
 FolderName=fr_adult_pix2pix_transfer_b6_25_1layer_pool5_DG
 python test_fr_aligned.py \
@@ -65,7 +65,7 @@ python test_fr_aligned.py \
   --netG resnet_4blocks \
   --epoch $Epoch\
   --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test
+  --gpu_ids 0,1 > rec/${FolderName}_test
 
 
 # #################### test
