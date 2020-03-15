@@ -31,9 +31,6 @@ Iter=100 #25, 100, 500, 2000
 #   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
 #   --serial_batches > rec/${FolderName}_rec 
 
-
-
-
 FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool5_DG_rr
 #################### train on adults faces and then children faces
 # [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
