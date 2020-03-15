@@ -37,7 +37,7 @@ FolderName=fr_aug_${ModelName}_b${BatchSize}_${Iter}_2layer
 cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
 python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal \
-  --resize_or_crop crop \
+  --resize_or_crop resize_and_crop \
   --continue_train \
   --name ${FolderName} \
   --dataset_mode aligned --model $ModelName --netG resnet_4blocks \
