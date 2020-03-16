@@ -3,7 +3,8 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
-def filtered_params(network, gpu_ids, key_layer=set([18,21])):
+def filtered_params(network, gpu_ids, key_layer=set([21])):
+    # 18, 21
     f_p = []
     num_key = 2 if gpu_ids else 1
     for name, param in network.named_parameters():
