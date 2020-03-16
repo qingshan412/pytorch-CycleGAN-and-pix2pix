@@ -2,7 +2,7 @@
 
 ModelName=pix2pix_transfer
 #################### test
-FolderName=fr_lag_aug_pix2pix_transfer_b6_100_2layer
+FolderName=fr_lag_aug_pix2pix_transfer_b6_500_2layer
 python test_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
   --name $FolderName \
@@ -10,7 +10,18 @@ python test_fr_aligned.py \
   --model $ModelName \
   --netG resnet_4blocks \
   --num_test 100 \
-  --gpu_ids 0,1 > rec/raw_${FolderName}_test 
+  --gpu_ids 0,1 > rec/${FolderName}_test 
+
+# #################### test
+# FolderName=fr_lag_aug_pix2pix_transfer_b6_100_2layer
+# python test_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+#   --name $FolderName \
+#   --dataset_mode unaligned \
+#   --model $ModelName \
+#   --netG resnet_4blocks \
+#   --num_test 100 \
+#   --gpu_ids 0,1 > rec/raw_${FolderName}_test 
 
 # BatchSize=6
 # ModelName=pix2pix_transfer #pix2pix #cycle_gan
