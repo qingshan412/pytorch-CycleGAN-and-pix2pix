@@ -2,7 +2,8 @@
 
 ModelName=pix2pix_transfer
 #################### test
-FolderName=fr_lag_aug_pix2pix_transfer_b6_500_2layer
+FolderName=fr_mix_aug_${ModelName}_b6_500_DG
+# fr_lag_aug_pix2pix_transfer_b6_500_2layer
 python test_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
   --name $FolderName \
