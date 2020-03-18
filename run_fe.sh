@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#$ -M jliu16@nd.edu      # Email address for job notification
+#$ -m abe                # Send mail when job begins, ends and aborts
+#$ -pe smp 16            # Specify parallel environment and legal core size
+#$ -q gpu
+#$ -l gpu_card=2
+#$ -N mix_test          # Specify job name
+
+module load python pytorch        # Required modules
+
 ModelName=pix2pix_transfer
 #################### test
 FolderName=fr_mix_${ModelName}_b6_500_DG
@@ -12,7 +21,7 @@ python test_fr_aligned.py \
   --model $ModelName \
   --netG resnet_4blocks \
   --num_test 100 \
-  --gpu_ids 0,1 > rec/${FolderName}_test 
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
 
 # #################### test
 # FolderName=fr_lag_aug_pix2pix_transfer_b6_100_2layer
