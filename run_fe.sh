@@ -21,7 +21,7 @@ python test_fr_aligned.py \
   --model $ModelName \
   --netG resnet_4blocks \
   --num_test 100 \
-  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+  --gpu_ids 0,2 > rec/${FolderName}_test 
 
 # #################### test
 # FolderName=fr_lag_aug_pix2pix_transfer_b6_100_2layer
