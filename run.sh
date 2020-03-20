@@ -14,23 +14,44 @@ module load python pytorch        # Required modules
 
 # echo "sync success!"
 # echo $CUDA_VISIBLE_DEVICES
-
-BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
-# Epoch=20
-Iter=100 #25, 100, 500, 2000
-FolderName=fr_lag_${ModelName}_b${BatchSize}_${Iter}_2layer
-#################### train on adults faces and then children faces
-[ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
-cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
-python train_fr_aligned.py \
-  --dataroot ../InsightFace_Pytorch/data/facebank/LAG_y_fine \
-  --continue_train \
-  --name ${FolderName} \
-  --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
-  --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
-  --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
-  --serial_batches > rec/${FolderName}_rec 
+BatchSize=6
+Iter=2000
+#################### test
+FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_DG
+python test_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+  --name $FolderName \
+  --dataset_mode unaligned \
+  --model $ModelName \
+  --netG resnet_4blocks \
+  --num_test 100 \
+  --gpu_ids 0,1 > rec/${FolderName}_test 
+
+FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_DG
+python test_fr_aligned.py \
+  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+  --name $FolderName \
+  --dataset_mode unaligned \
+  --model $ModelName \
+  --netG resnet_4blocks \
+  --num_test 100 \
+  --gpu_ids 0,1 > rec/${FolderName}_test 
+
+# # Epoch=20
+# Iter=100 #25, 100, 500, 2000
+# FolderName=fr_lag_${ModelName}_b${BatchSize}_${Iter}_2layer
+# #################### train on adults faces and then children faces
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# python train_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/LAG_y_fine \
+#   --continue_train \
+#   --name ${FolderName} \
+#   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+#   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
+#   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+#   --serial_batches > rec/${FolderName}_rec 
 
 #################### test
 # FolderName=fr_aug_pix2pix_transfer_b6_100_2layer
