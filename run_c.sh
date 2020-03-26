@@ -40,25 +40,54 @@ python train_fr_aligned.py \
   --resize_or_crop resize_and_crop \
   --continue_train \
   --name ${FolderName} \
-  --save_epoch_freq 50 \
   --dataset_mode aligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
   --serial_batches > rec/${FolderName}_rec 
 
-FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_full
+FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_pool5_full
 #################### train on adults faces and then children faces
 [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
 cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
 python train_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/LAG_y_fine \
+  --resize_or_crop resize_and_crop \
   --continue_train \
   --name ${FolderName} \
-  --save_epoch_freq 50 \
-  --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+  --pool_size 5 \
+  --dataset_mode aligned --model $ModelName --netG resnet_4blocks \
   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
   --serial_batches > rec/${FolderName}_rec 
+
+# FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_full
+# #################### train on adults faces and then children faces
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# python train_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/LAG_y_fine \
+#   --resize_or_crop resize_and_crop \
+#   --continue_train \
+#   --name ${FolderName} \
+#   --save_epoch_freq 50 \
+#   --dataset_mode aligned --model $ModelName --netG resnet_4blocks \
+#   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
+#   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+#   --serial_batches > rec/${FolderName}_rec 
+
+# FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_full
+# #################### train on adults faces and then children faces
+# [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
+# cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
+# python train_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/LAG_y_fine \
+#   --continue_train \
+#   --name ${FolderName} \
+#   --save_epoch_freq 50 \
+#   --dataset_mode unaligned --model $ModelName --netG resnet_4blocks \
+#   --batch_size $BatchSize --niter $Iter --niter_decay $Iter \
+#   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
+#   --serial_batches > rec/${FolderName}_rec 
 
 # FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_1layer
 # #################### train on adults faces and then children faces
