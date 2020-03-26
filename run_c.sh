@@ -16,7 +16,7 @@ module load python pytorch        # Required modules
 # echo $CUDA_VISIBLE_DEVICES
 BatchSize=6
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
-Iter=2000 #25, 100, 500, 2000
+Iter=100 #25, 100, 500, 2000
 # FolderName=fr_adult_${ModelName}_b${BatchSize}_${Iter}_1layer_pool50_DG_raw
 
 #################### train on adults faces and then children faces
