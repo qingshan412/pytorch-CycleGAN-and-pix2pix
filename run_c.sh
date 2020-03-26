@@ -31,7 +31,7 @@ Iter=2000 #25, 100, 500, 2000
 #   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
 #   --serial_batches > rec/${FolderName}_rec 
 
-FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_D2G
+FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_full
 #################### train on adults faces and then children faces
 [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
 cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
@@ -46,7 +46,7 @@ python train_fr_aligned.py \
   --display_id -1 --gpu_ids $CUDA_VISIBLE_DEVICES \
   --serial_batches > rec/${FolderName}_rec 
 
-FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_D2G
+FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_full
 #################### train on adults faces and then children faces
 [ -d "./checkpoints/${FolderName}" ] && rm -r ./checkpoints/${FolderName}
 cp -r ./checkpoints/fr_adult_basic_b6 ./checkpoints/${FolderName}
