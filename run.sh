@@ -16,9 +16,9 @@ module load python pytorch        # Required modules
 # echo $CUDA_VISIBLE_DEVICES
 ModelName=pix2pix_transfer #pix2pix #cycle_gan
 BatchSize=6
-Iter=2000
+Iter=100
 #################### test
-FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_DG
+FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_pool5_full
 python test_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
   --name $FolderName \
@@ -26,17 +26,27 @@ python test_fr_aligned.py \
   --model $ModelName \
   --netG resnet_4blocks \
   --num_test 100 \
-  --gpu_ids 0,1 > rec/${FolderName}_test 
+  --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
 
-FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_DG
-python test_fr_aligned.py \
-  --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
-  --name $FolderName \
-  --dataset_mode unaligned \
-  --model $ModelName \
-  --netG resnet_4blocks \
-  --num_test 100 \
-  --gpu_ids 0,1 > rec/${FolderName}_test 
+# FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_DG
+# python test_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+#   --name $FolderName \
+#   --dataset_mode unaligned \
+#   --model $ModelName \
+#   --netG resnet_4blocks \
+#   --num_test 100 \
+#   --gpu_ids 0,1 > rec/${FolderName}_test 
+
+# FolderName=fr_mix_${ModelName}_b${BatchSize}_${Iter}_DG
+# python test_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+#   --name $FolderName \
+#   --dataset_mode unaligned \
+#   --model $ModelName \
+#   --netG resnet_4blocks \
+#   --num_test 100 \
+#   --gpu_ids 0,1 > rec/${FolderName}_test 
 
 # # Epoch=20
 # Iter=100 #25, 100, 500, 2000
