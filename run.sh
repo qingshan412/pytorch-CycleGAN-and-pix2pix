@@ -18,7 +18,7 @@ ModelName=pix2pix_transfer #pix2pix #cycle_gan
 BatchSize=6
 Iter=100
 #################### test
-FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_pool5_full
+FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_full
 python test_fr_aligned.py \
   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
   --name $FolderName \
@@ -27,6 +27,16 @@ python test_fr_aligned.py \
   --netG resnet_4blocks \
   --num_test 100 \
   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
+
+# FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_pool5_full
+# python test_fr_aligned.py \
+#   --dataroot ../InsightFace_Pytorch/data/facebank/noonan+normal/ \
+#   --name $FolderName \
+#   --dataset_mode unaligned \
+#   --model $ModelName \
+#   --netG resnet_4blocks \
+#   --num_test 100 \
+#   --gpu_ids $CUDA_VISIBLE_DEVICES > rec/${FolderName}_test 
 
 # FolderName=fr_mix_aug_${ModelName}_b${BatchSize}_${Iter}_DG
 # python test_fr_aligned.py \
